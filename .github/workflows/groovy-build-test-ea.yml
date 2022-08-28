@@ -41,5 +41,5 @@ jobs:
           check-latest: true
       - uses: gradle/gradle-build-action@v2
       - name: Test with Gradle
-        run: ./gradlew test -Ptarget.java.home=/home/runner/openjdk
+        run: ./gradlew check -Ptarget.java.home=/home/runner/openjdk
         timeout-minutes: 60
