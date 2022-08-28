@@ -112,7 +112,7 @@ tasks.withType(Test).configureEach {
         classpath = testTask.classpath
         testClassesDirs = testTask.testClassesDirs
     }
-    tasks.named("check").configure {
+    (tasks.findByName("testMatrix") ?: tasks.create("testMatrix")).configure {
         dependsOn(jdkTest)
     }
 }
