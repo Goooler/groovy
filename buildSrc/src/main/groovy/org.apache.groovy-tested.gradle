@@ -87,10 +87,7 @@ tasks.withType(Test).configureEach {
             delete(grapeDirectory)
         }
     }
-    doLast {
-        fs.delete {
-            delete(files(".").filter { it.name.endsWith '.class' })
-        }
+    (tasks.findByName("testMatrix") ?: tasks.register("testMatrix")).configure {
         // Create a test task for each supported JDK.
         (8..17).each { majorVersion ->
             def jdkTest = tasks.register("testJdk$majorVersion", Test) {
@@ -103,6 +100,11 @@ tasks.withType(Test).configureEach {
                 it.testClassesDirs = testClassesDirs
             }
             dependsOn(jdkTest)
+        }
+    }
+    doLast {
+        fs.delete {
+            delete(files(".").filter { it.name.endsWith '.class' })
         }
     }
 }
