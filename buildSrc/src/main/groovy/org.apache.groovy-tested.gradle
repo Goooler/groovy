@@ -87,25 +87,33 @@ tasks.withType(Test).configureEach {
             delete(grapeDirectory)
         }
     }
-    (tasks.findByName("testMatrix") ?: tasks.register("testMatrix")).configure {
-        // Create a test task for each supported JDK.
-        (8..17).each { majorVersion ->
-            def jdkTest = tasks.register("testJdk$majorVersion", Test) {
-                it.javaLauncher = javaToolchains.launcherFor {
-                    languageVersion = JavaLanguageVersion.of(majorVersion)
-                }
-                it.description = "Runs the test suite on JDK $majorVersion"
-                it.group = LifecycleBasePlugin.VERIFICATION_GROUP
-                it.classpath = classpath
-                it.testClassesDirs = testClassesDirs
-            }
-            dependsOn(jdkTest)
-        }
-    }
     doLast {
         fs.delete {
             delete(files(".").filter { it.name.endsWith '.class' })
         }
+    }
+}
+
+// Create a test task for each supported JDK.
+(8..17).each { majorVersion ->
+    // Adoptium JDK 9 cannot extract on Linux or Mac OS.
+    if (majorVersion == 9) return
+
+    def jdkTest = tasks.register("testJdk$majorVersion", Test) {
+        javaLauncher = javaToolchains.launcherFor {
+            languageVersion = JavaLanguageVersion.of(majorVersion)
+        }
+
+        description = "Runs the test suite on JDK $majorVersion"
+        group = LifecycleBasePlugin.VERIFICATION_GROUP
+
+        // Copy inputs from normal Test task.
+        def testTask = tasks.getByName("test")
+        classpath = testTask.classpath
+        testClassesDirs = testTask.testClassesDirs
+    }
+    tasks.named("check").configure {
+        dependsOn(jdkTest)
     }
 }
 
