@@ -91,6 +91,19 @@ tasks.withType(Test).configureEach {
         fs.delete {
             delete(files(".").filter { it.name.endsWith '.class' })
         }
+        // Create a test task for each supported JDK.
+        (8..17).each { majorVersion ->
+            def jdkTest = tasks.register("testJdk$majorVersion", Test) {
+                it.javaLauncher = javaToolchains.launcherFor {
+                    languageVersion = JavaLanguageVersion.of(majorVersion)
+                }
+                it.description = "Runs the test suite on JDK $majorVersion"
+                it.group = LifecycleBasePlugin.VERIFICATION_GROUP
+                it.classpath = classpath
+                it.testClassesDirs = testClassesDirs
+            }
+            dependsOn(jdkTest)
+        }
     }
 }
 
