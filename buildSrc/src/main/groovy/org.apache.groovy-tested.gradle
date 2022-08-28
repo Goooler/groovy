@@ -32,7 +32,7 @@ sourceSets {
     }
 }
 
-def configureTest = { Test it ->
+tasks.withType(Test).configureEach {
     def fs = objects.newInstance(TestServices).fileSystemOperations
     def grapeDirectory = new File(temporaryDir, "grape")
     def jdk8 = ['-XX:+UseConcMarkSweepGC']
@@ -50,10 +50,10 @@ def configureTest = { Test it ->
         systemProperties 'java.awt.headless': 'true'
     }
     systemProperties 'apple.awt.UIElement': 'true',
-        'javadocAssertion.src.dir': './src/main',
-        'grape.root': grapeDirectory.absolutePath,
-        'gradle.home': gradle.gradleHomeDir, // this is needed by the security.policy
-        'user.home': temporaryDir.absolutePath // make sure tests are isolated from real user home or tests using Grape may fail
+            'javadocAssertion.src.dir': './src/main',
+            'grape.root': grapeDirectory.absolutePath,
+            'gradle.home': gradle.gradleHomeDir, // this is needed by the security.policy
+            'user.home': temporaryDir.absolutePath // make sure tests are isolated from real user home or tests using Grape may fail
 
     if (rootProject.hasProperty('target.java.home')) {
         String targetJavaHome = rootProject.property('target.java.home')?.trim()
@@ -94,10 +94,6 @@ def configureTest = { Test it ->
     }
 }
 
-tasks.withType(Test).configureEach {
-    configureTest(it)
-}
-
 // Create a test task for each supported JDK.
 (8..JavaVersion.current().majorVersion.toInteger()).each { majorVersion ->
     // Adoptium JDK 9 cannot extract on Linux or Mac OS.
@@ -111,7 +107,10 @@ tasks.withType(Test).configureEach {
         description = "Runs the test suite on JDK $majorVersion"
         group = LifecycleBasePlugin.VERIFICATION_GROUP
 
-        configureTest(it)
+        // Copy inputs from normal Test task.
+        def testTask = tasks.getByName("test")
+        classpath = testTask.classpath
+        testClassesDirs = testTask.testClassesDirs
     }
     (tasks.findByName("testMatrix") ?: tasks.create("testMatrix")).configure {
         dependsOn(jdkTest)
