@@ -32,6 +32,29 @@ sourceSets {
     }
 }
 
+// Create a test task for each supported JDK.
+(8..JavaVersion.current().majorVersion.toInteger()).each { majorVersion ->
+    // Adoptium JDK 9 cannot extract on Linux or Mac OS.
+    if (majorVersion == 9) return
+
+    def jdkTest = tasks.register("testJdk$majorVersion", Test) {
+        javaLauncher = javaToolchains.launcherFor {
+            languageVersion = JavaLanguageVersion.of(majorVersion)
+        }
+
+        description = "Runs the test suite on JDK $majorVersion"
+        group = LifecycleBasePlugin.VERIFICATION_GROUP
+
+        // Copy inputs from normal Test task.
+        def testTask = tasks.getByName("test")
+        classpath = testTask.classpath
+        testClassesDirs = testTask.testClassesDirs
+    }
+    (tasks.findByName("testMatrix") ?: tasks.create("testMatrix")).configure {
+        dependsOn(jdkTest)
+    }
+}
+
 tasks.withType(Test).configureEach {
     def fs = objects.newInstance(TestServices).fileSystemOperations
     def grapeDirectory = new File(temporaryDir, "grape")
@@ -91,29 +114,6 @@ tasks.withType(Test).configureEach {
         fs.delete {
             delete(files(".").filter { it.name.endsWith '.class' })
         }
-    }
-}
-
-// Create a test task for each supported JDK.
-(8..JavaVersion.current().majorVersion.toInteger()).each { majorVersion ->
-    // Adoptium JDK 9 cannot extract on Linux or Mac OS.
-    if (majorVersion == 9) return
-
-    def jdkTest = tasks.register("testJdk$majorVersion", Test) {
-        javaLauncher = javaToolchains.launcherFor {
-            languageVersion = JavaLanguageVersion.of(majorVersion)
-        }
-
-        description = "Runs the test suite on JDK $majorVersion"
-        group = LifecycleBasePlugin.VERIFICATION_GROUP
-
-        // Copy inputs from normal Test task.
-        def testTask = tasks.getByName("test")
-        classpath = testTask.classpath
-        testClassesDirs = testTask.testClassesDirs
-    }
-    (tasks.findByName("testMatrix") ?: tasks.create("testMatrix")).configure {
-        dependsOn(jdkTest)
     }
 }
 
