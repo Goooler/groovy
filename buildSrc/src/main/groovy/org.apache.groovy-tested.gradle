@@ -32,6 +32,74 @@ sourceSets {
     }
 }
 
+def configureTest(Test test) {
+    test.configure {
+        def fs = objects.newInstance(TestServices).fileSystemOperations
+        def grapeDirectory = new File(temporaryDir, "grape")
+        def jdk8 = ['-XX:+UseConcMarkSweepGC']
+        def jdk9 = ['-Djava.locale.providers=COMPAT,SPI']
+//        def jdk9 = ['-Djava.locale.providers=COMPAT,SPI', '--illegal-access=debug']
+        def common = ['-ea', "-Xms${groovyJUnit_ms}", "-Xmx${groovyJUnit_mx}", "-Duser.language=en"]
+        if (JavaVersion.current().isJava9Compatible()) {
+            jvmArgs(*common, *jdk9)
+            systemProperty "groovy.force.illegal.access", findProperty("groovy.force.illegal.access")
+        } else {
+            jvmArgs(*common, *jdk8)
+        }
+        def headless = System.properties['java.awt.headless']
+        if (headless == 'true') {
+            systemProperties 'java.awt.headless': 'true'
+        }
+        systemProperties 'apple.awt.UIElement': 'true',
+            'javadocAssertion.src.dir': './src/main',
+            'grape.root': grapeDirectory.absolutePath,
+            'gradle.home': gradle.gradleHomeDir, // this is needed by the security.policy
+            'user.home': temporaryDir.absolutePath // make sure tests are isolated from real user home or tests using Grape may fail
+
+        if (rootProject.hasProperty('target.java.home')) {
+            String targetJavaHome = rootProject.property('target.java.home')?.trim()
+            if (targetJavaHome) {
+                executable = "${targetJavaHome}/bin/java"
+                println "Using ${executable} to run tests"
+            }
+        }
+
+        forkEvery = 50
+        maxParallelForks = sharedConfiguration.isRunningOnCI ? 1 : Runtime.runtime.availableProcessors().intdiv(2) ?: 1
+        scanForTestClasses = true
+        ignoreFailures = false
+        testLogging {
+            exceptionFormat = 'full'
+            // uncomment the following line if you need more logging
+            // events "failed", "started"
+        }
+        def testdb = System.properties['groovy.testdb.props']
+        if (testdb) {
+            systemProperties 'groovy.testdb.props': testdb
+        }
+
+        classpath = files('src/test') + classpath
+        exclude buildExcludeFilter(it.name == 'test')
+        ext.resultText = ''
+        usesService(ConcurrentExecutionControlBuildService.restrict(Test, gradle, 2))
+        doFirst {
+            fs.delete {
+                // delete if it exists already to be in a clean state
+                delete(grapeDirectory)
+            }
+        }
+        doLast {
+            fs.delete {
+                delete(files(".").filter { it.name.endsWith '.class' })
+            }
+        }
+    }
+}
+
+tasks.withType(Test).configureEach {
+    configureTest(it)
+}
+
 // Create a test task for each supported JDK.
 (8..JavaVersion.current().majorVersion.toInteger()).each { majorVersion ->
     // Adoptium JDK 9 cannot extract on Linux or Mac OS.
@@ -45,75 +113,10 @@ sourceSets {
         description = "Runs the test suite on JDK $majorVersion"
         group = LifecycleBasePlugin.VERIFICATION_GROUP
 
-        // Copy inputs from normal Test task.
-        def testTask = tasks.getByName("test")
-        classpath = testTask.classpath
-        testClassesDirs = testTask.testClassesDirs
+        configureTest(it)
     }
     (tasks.findByName("testMatrix") ?: tasks.create("testMatrix")).configure {
         dependsOn(jdkTest)
-    }
-}
-
-tasks.withType(Test).configureEach {
-    def fs = objects.newInstance(TestServices).fileSystemOperations
-    def grapeDirectory = new File(temporaryDir, "grape")
-    def jdk8 = ['-XX:+UseConcMarkSweepGC']
-    def jdk9 = ['-Djava.locale.providers=COMPAT,SPI']
-//        def jdk9 = ['-Djava.locale.providers=COMPAT,SPI', '--illegal-access=debug']
-    def common = ['-ea', "-Xms${groovyJUnit_ms}", "-Xmx${groovyJUnit_mx}", "-Duser.language=en"]
-    if (JavaVersion.current().isJava9Compatible()) {
-        jvmArgs(*common, *jdk9)
-        systemProperty "groovy.force.illegal.access", findProperty("groovy.force.illegal.access")
-    } else {
-        jvmArgs(*common, *jdk8)
-    }
-    def headless = System.properties['java.awt.headless']
-    if (headless == 'true') {
-        systemProperties 'java.awt.headless': 'true'
-    }
-    systemProperties 'apple.awt.UIElement': 'true',
-            'javadocAssertion.src.dir': './src/main',
-            'grape.root': grapeDirectory.absolutePath,
-            'gradle.home': gradle.gradleHomeDir, // this is needed by the security.policy
-            'user.home': temporaryDir.absolutePath // make sure tests are isolated from real user home or tests using Grape may fail
-
-    if (rootProject.hasProperty('target.java.home')) {
-        String targetJavaHome = rootProject.property('target.java.home')?.trim()
-        if (targetJavaHome) {
-            executable = "${targetJavaHome}/bin/java"
-            println "Using ${executable} to run tests"
-        }
-    }
-
-    forkEvery = 50
-    maxParallelForks = sharedConfiguration.isRunningOnCI ? 1 : Runtime.runtime.availableProcessors().intdiv(2) ?: 1
-    scanForTestClasses = true
-    ignoreFailures = false
-    testLogging {
-        exceptionFormat = 'full'
-        // uncomment the following line if you need more logging
-        // events "failed", "started"
-    }
-    def testdb = System.properties['groovy.testdb.props']
-    if (testdb) {
-        systemProperties 'groovy.testdb.props': testdb
-    }
-
-    classpath = files('src/test') + classpath
-    exclude buildExcludeFilter(it.name == 'test')
-    ext.resultText = ''
-    usesService(ConcurrentExecutionControlBuildService.restrict(Test, gradle, 2))
-    doFirst {
-        fs.delete {
-            // delete if it exists already to be in a clean state
-            delete(grapeDirectory)
-        }
-    }
-    doLast {
-        fs.delete {
-            delete(files(".").filter { it.name.endsWith '.class' })
-        }
     }
 }
 
