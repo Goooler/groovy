@@ -157,12 +157,6 @@ configurations {
 }
 
 allprojects {
-    repositories {
-        mavenCentral()
-        maven{ url('https://repository.ow2.org/nexus/content/repositories/public/')}
-        mavenLocal()
-    }
-
     tasks.withType(AbstractCopyTask).configureEach {
         it.duplicatesStrategy = DuplicatesStrategy.WARN
     }
