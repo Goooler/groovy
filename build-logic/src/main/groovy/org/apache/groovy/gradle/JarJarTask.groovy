@@ -192,5 +192,4 @@ class JarJarTask extends DefaultTask {
     private static String baseName(File file) {
         file.name.substring(0, file.name.lastIndexOf('-'))
     }
-
 }
