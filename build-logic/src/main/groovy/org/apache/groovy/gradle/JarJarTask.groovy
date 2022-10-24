@@ -36,6 +36,7 @@ import org.gradle.api.tasks.Optional
 import org.gradle.api.tasks.TaskAction
 
 import javax.inject.Inject
+import java.text.SimpleDateFormat
 
 @CacheableTask
 class JarJarTask extends DefaultTask {
@@ -113,7 +114,7 @@ class JarJarTask extends DefaultTask {
         def manifestFile = new File(temporaryDir, 'MANIFEST.MF')
         // First step is to create a repackaged jar
         outputFile.parentFile.mkdirs()
-        def tstamp = Date.parse('yyyy-MM-dd HH:mm', '1980-02-01 00:00').time.toString()
+        def tstamp = (new SimpleDateFormat('yyyy-MM-dd HH:mm')).parse('1980-02-01 00:00').time.toString()
         try {
             project.ant {
                 taskdef name: 'jarjar', classname: JARJAR_CLASS_NAME, classpath: jarjarToolClasspath.asPath
