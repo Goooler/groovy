@@ -321,7 +321,7 @@ public class ObjectGraphBuilder extends FactoryBuilderSupport {
         if (attributes.get(referenceResolver.getReferenceFor((String) name)) != null) {
             return objectRefFactory;
         }
-        if (beanFactoryName != null && beanFactoryName.equals((String) name)) {
+        if (beanFactoryName != null && beanFactoryName.equals(name)) {
             return objectBeanFactory;
         }
         return objectFactory;

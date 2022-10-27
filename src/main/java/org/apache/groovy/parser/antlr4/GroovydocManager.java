@@ -137,7 +137,7 @@ public class GroovydocManager {
             if (node == child) {
                 // if no doc comment node found and no siblings of same type before the node,
                 // try to find doc comment node of its parent
-                if (!asBoolean((Object) docCommentNodeText) && !sameTypeNodeBefore) {
+                if (!asBoolean(docCommentNodeText) && !sameTypeNodeBefore) {
                     return findDocCommentByNode(parentContext);
                 }
 

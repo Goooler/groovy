@@ -796,7 +796,7 @@ public class Node implements Serializable, Cloneable {
         if(textIsEmptyOrNull()){
             return null;
         }
-        return StringGroovyMethods.toInteger((CharSequence)text());
+        return StringGroovyMethods.toInteger(text());
     }
 
     /**
@@ -808,7 +808,7 @@ public class Node implements Serializable, Cloneable {
         if(textIsEmptyOrNull()){
             return null;
         }
-        return StringGroovyMethods.toLong((CharSequence)text());
+        return StringGroovyMethods.toLong(text());
     }
 
     /**
@@ -820,7 +820,7 @@ public class Node implements Serializable, Cloneable {
         if(textIsEmptyOrNull()){
             return null;
         }
-        return StringGroovyMethods.toFloat((CharSequence)text());
+        return StringGroovyMethods.toFloat(text());
     }
 
     /**
@@ -832,7 +832,7 @@ public class Node implements Serializable, Cloneable {
         if(textIsEmptyOrNull()){
             return null;
         }
-        return StringGroovyMethods.toDouble((CharSequence)text());
+        return StringGroovyMethods.toDouble(text());
     }
 
     /**
@@ -844,7 +844,7 @@ public class Node implements Serializable, Cloneable {
         if(textIsEmptyOrNull()){
             return null;
         }
-        return StringGroovyMethods.toBigDecimal((CharSequence)text());
+        return StringGroovyMethods.toBigDecimal(text());
     }
 
     /**
@@ -856,7 +856,7 @@ public class Node implements Serializable, Cloneable {
         if(textIsEmptyOrNull()){
             return null;
         }
-        return StringGroovyMethods.toBigInteger((CharSequence)text());
+        return StringGroovyMethods.toBigInteger(text());
     }
 
     private boolean textIsEmptyOrNull() {

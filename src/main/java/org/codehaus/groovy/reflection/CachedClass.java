@@ -143,7 +143,7 @@ public class CachedClass {
 
         @Override
         public CallSiteClassLoader initValue() {
-            return doPrivileged((PrivilegedAction<CallSiteClassLoader>) () -> new CallSiteClassLoader(CachedClass.this.cachedClass));
+            return doPrivileged(() -> new CallSiteClassLoader(CachedClass.this.cachedClass));
         }
     };
 

@@ -142,7 +142,7 @@ public class LoaderConfiguration {
 
         if (requireMain && main == null) throw new IOException("missing main class definition in config file");
         if (!configScripts.isEmpty()) {
-            System.setProperty("groovy.starter.configscripts", DefaultGroovyMethods.join((Iterable)configScripts, ","));
+            System.setProperty("groovy.starter.configscripts", DefaultGroovyMethods.join(configScripts, ","));
         }
     }
 

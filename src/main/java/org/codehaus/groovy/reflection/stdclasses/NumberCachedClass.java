@@ -56,7 +56,7 @@ public class NumberCachedClass extends CachedClass {
         if (param == Byte.class /*|| param == Byte.TYPE*/) {
             argument = ((Number) argument).byteValue();
         } else if (param == BigInteger.class) {
-            argument = new BigInteger(String.valueOf((Number) argument));
+            argument = new BigInteger(String.valueOf(argument));
         }
 
         return argument;

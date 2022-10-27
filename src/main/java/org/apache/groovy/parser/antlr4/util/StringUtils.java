@@ -41,7 +41,7 @@ public class StringUtils {
 			return text;
 		}
 
-		return StringGroovyMethods.replaceAll((CharSequence) text, HEX_ESCAPES_PATTERN, new Closure<Void>(null, null) {
+		return StringGroovyMethods.replaceAll(text, HEX_ESCAPES_PATTERN, new Closure<Void>(null, null) {
 			Object doCall(String _0, String _1, String _2) {
 				if (isLengthOdd(_1)) {
 					return _0;
@@ -57,7 +57,7 @@ public class StringUtils {
 			return text;
 		}
 
-		return StringGroovyMethods.replaceAll((CharSequence) text, OCTAL_ESCAPES_PATTERN, new Closure<Void>(null, null) {
+		return StringGroovyMethods.replaceAll(text, OCTAL_ESCAPES_PATTERN, new Closure<Void>(null, null) {
 			Object doCall(String _0, String _1, String _2) {
 				if (isLengthOdd(_1)) {
 					return _0;
@@ -82,7 +82,7 @@ public class StringUtils {
 			return text;
 		}
 
-		String result = StringGroovyMethods.replaceAll((CharSequence) text, STANDARD_ESCAPES_PATTERN, new Closure<Void>(null, null) {
+		String result = StringGroovyMethods.replaceAll(text, STANDARD_ESCAPES_PATTERN, new Closure<Void>(null, null) {
 			Object doCall(String _0, String _1, String _2) {
 				if (isLengthOdd(_1)) {
 					return _0;
@@ -140,7 +140,7 @@ public class StringUtils {
 			return text;
 		}
 
-		text = StringGroovyMethods.replaceAll((CharSequence) text, LINE_ESCAPE_PATTERN, new Closure<Void>(null, null) {
+		text = StringGroovyMethods.replaceAll(text, LINE_ESCAPE_PATTERN, new Closure<Void>(null, null) {
 			Object doCall(String _0, String _1) {
 				if (isLengthOdd(_1)) {
 					return _0;
@@ -210,7 +210,7 @@ public class StringUtils {
 		}
 		final int replLength = searchString.length();
 		int increase = replacement.length() - replLength;
-		increase = (increase < 0 ? 0 : increase) * 16;
+		increase = (Math.max(increase, 0)) * 16;
 		final StringBuilder buf = new StringBuilder(text.length() + increase);
 		while (end != INDEX_NOT_FOUND) {
 			buf.append(text, start, end).append(replacement);

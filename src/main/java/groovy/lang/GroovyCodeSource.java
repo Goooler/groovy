@@ -122,7 +122,7 @@ public class GroovyCodeSource {
         //The calls below require access to user.dir - allow here since getName() and getCodeSource() are
         //package private and used only by the GroovyClassLoader.
         try {
-            Object[] info = doPrivileged((PrivilegedExceptionAction<Object[]>) () -> {
+            Object[] info = doPrivileged(() -> {
                 // retrieve the content of the file using the provided encoding
                 if (encoding != null) {
                     scriptText = ResourceGroovyMethods.getText(infile, encoding);

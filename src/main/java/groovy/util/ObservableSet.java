@@ -188,7 +188,7 @@ public class ObservableSet<E> implements Set<E> {
 
     @Override
     public <T> T[] toArray(T[] ts) {
-        return (T[]) delegate.toArray(ts);
+        return delegate.toArray(ts);
     }
 
     @Override

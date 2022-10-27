@@ -628,7 +628,7 @@ public class StringGroovyMethods extends DefaultGroovyMethodsSupport {
      * @since 1.8.2
      */
     public static <T> T eachLine(final CharSequence self, @ClosureParams(value=FromString.class, options={"String","String,Integer"}) final Closure<T> closure) throws IOException {
-        return eachLine((CharSequence)self.toString(), 0, closure);
+        return eachLine(self.toString(), 0, closure);
     }
 
     /**
@@ -2506,7 +2506,7 @@ public class StringGroovyMethods extends DefaultGroovyMethodsSupport {
     private static class ReplaceState {
         public ReplaceState(Map<CharSequence, CharSequence> replacements) {
             this.noMoreMatches = new boolean[replacements.size()];
-            this.replacementsList = DefaultGroovyMethods.toList((Iterable<Map.Entry<CharSequence,CharSequence>>) replacements.entrySet());
+            this.replacementsList = DefaultGroovyMethods.toList(replacements.entrySet());
         }
 
         int textIndex = -1;

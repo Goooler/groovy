@@ -158,7 +158,7 @@ public class ListHashMap<K,V> implements Map<K,V> {
                 clearArrays();
             }
         }
-        V val = (V) innerMap.put(key, value);
+        V val = innerMap.put(key, value);
         size = innerMap.size();
         return val;
     }

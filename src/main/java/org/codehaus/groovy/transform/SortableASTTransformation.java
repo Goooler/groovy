@@ -191,7 +191,7 @@ public class SortableASTTransformation extends AbstractASTTransformation {
     }
 
     private static void createComparatorFor(ClassNode classNode, PropertyNode property, boolean reversed) {
-        String propName = StringGroovyMethods.capitalize((CharSequence) property.getName());
+        String propName = StringGroovyMethods.capitalize(property.getName());
         String className = classNode.getName() + "$" + propName + "Comparator";
         ClassNode superClass = makeClassSafeWithGenerics(AbstractComparator.class, classNode);
         InnerClassNode cmpClass = new InnerClassNode(classNode, className, ACC_PRIVATE | ACC_STATIC, superClass);

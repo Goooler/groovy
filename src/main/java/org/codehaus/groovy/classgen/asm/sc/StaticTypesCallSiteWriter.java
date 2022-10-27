@@ -184,7 +184,7 @@ public class StaticTypesCallSiteWriter extends CallSiteWriter {
 
         // for maps, replace "map.foo" with "map.get('foo')" -- if no public field "foo" is declared (GROOVY-5001)
         if (!isStaticProperty && isOrImplements(receiverType, MAP_TYPE)
-                && !java.util.Optional.ofNullable(getField(receiverType, propertyName)).filter(FieldNode::isPublic).isPresent()) {
+                && java.util.Optional.ofNullable(getField(receiverType, propertyName)).filter(FieldNode::isPublic).isEmpty()) {
             writeMapDotProperty(receiver, propertyName, safe);
             return;
         }

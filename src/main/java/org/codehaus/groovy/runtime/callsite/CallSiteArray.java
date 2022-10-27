@@ -58,7 +58,7 @@ public final class CallSiteArray {
     }
 
     private static CallSite createCallStaticSite(CallSite callSite, final Class receiver, Object[] args) {
-        doPrivileged((PrivilegedAction<Void>) () -> {
+        doPrivileged(() -> {
             try {
                 Class.forName(receiver.getName(), true, receiver.getClassLoader());
             } catch (Exception e) {

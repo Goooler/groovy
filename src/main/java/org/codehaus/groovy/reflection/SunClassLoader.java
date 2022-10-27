@@ -47,7 +47,7 @@ public class SunClassLoader extends ClassLoader {
     static {
         SunClassLoader res;
         try {
-            res = doPrivileged((PrivilegedAction<SunClassLoader>) () -> {
+            res = doPrivileged(() -> {
                 try {
                     return new SunClassLoader();
                 } catch (Throwable e) {

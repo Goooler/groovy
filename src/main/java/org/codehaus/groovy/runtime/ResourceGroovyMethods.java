@@ -1504,7 +1504,7 @@ public class ResourceGroovyMethods extends DefaultGroovyMethodsSupport {
         // null check because of http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=4803836
         if (origFiles != null) {
             List<File> files = Arrays.asList(origFiles);
-            if (sort != null) files = DefaultGroovyMethods.sort((Iterable<File>) files, sort);
+            if (sort != null) files = DefaultGroovyMethods.sort(files, sort);
             for (File file : files) {
                 if (file.isDirectory()) {
                     if (type != FileType.FILES) {
@@ -1790,7 +1790,7 @@ public class ResourceGroovyMethods extends DefaultGroovyMethodsSupport {
         if (c == Writable.class) {
             return (T) asWritable(f);
         }
-        return DefaultGroovyMethods.asType((Object) f, c);
+        return DefaultGroovyMethods.asType(f, c);
     }
 
     /**

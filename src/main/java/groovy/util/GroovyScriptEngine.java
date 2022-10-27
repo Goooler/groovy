@@ -338,7 +338,7 @@ public class GroovyScriptEngine implements ResourceConnector {
      */
     private GroovyClassLoader initGroovyLoader() {
         GroovyClassLoader groovyClassLoader =
-                doPrivileged((PrivilegedAction<ScriptClassLoader>) () -> {
+                doPrivileged(() -> {
                     if (parentLoader instanceof GroovyClassLoader) {
                         return new ScriptClassLoader((GroovyClassLoader) parentLoader);
                     } else {

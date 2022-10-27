@@ -254,7 +254,7 @@ public class GroovyClassLoader extends URLClassLoader {
      * @return the main class defined in the given script
      */
     public Class parseClass(final String text, final String fileName) throws CompilationFailedException {
-        GroovyCodeSource gcs = createCodeSource((PrivilegedAction<GroovyCodeSource>) () -> new GroovyCodeSource(text, fileName, "/groovy/script"));
+        GroovyCodeSource gcs = createCodeSource(() -> new GroovyCodeSource(text, fileName, "/groovy/script"));
         gcs.setCachable(false);
         return parseClass(gcs);
     }
@@ -284,7 +284,7 @@ public class GroovyClassLoader extends URLClassLoader {
     }
 
     public Class parseClass(final Reader reader, final String fileName) throws CompilationFailedException {
-        GroovyCodeSource gcs = createCodeSource((PrivilegedAction<GroovyCodeSource>) () -> {
+        GroovyCodeSource gcs = createCodeSource(() -> {
             try {
                 String scriptText = IOGroovyMethods.getText(reader);
                 return new GroovyCodeSource(scriptText, fileName, "/groovy/script");

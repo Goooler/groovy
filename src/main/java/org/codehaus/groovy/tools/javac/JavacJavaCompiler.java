@@ -196,7 +196,7 @@ public class JavacJavaCompiler implements JavaCompiler {
             }
 
             params.add("-classpath");
-            params.add(DefaultGroovyMethods.join((Iterable<String>) paths, File.pathSeparator));
+            params.add(DefaultGroovyMethods.join(paths, File.pathSeparator));
         }
 
         return params;

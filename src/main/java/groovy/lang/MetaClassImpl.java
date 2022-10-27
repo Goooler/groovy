@@ -283,7 +283,7 @@ public class MetaClassImpl implements MetaClass, MutableMetaClass {
         if (o instanceof FastArray) {
             return ((FastArray) o).toList();
         }
-        return Collections.<MetaMethod>singletonList((MetaMethod) o);
+        return Collections.singletonList((MetaMethod) o);
     }
 
     /**
@@ -3490,9 +3490,9 @@ public class MetaClassImpl implements MetaClass, MutableMetaClass {
         //     introspect
         try {
             if (isBeanDerivative(theClass)) {
-                info = (BeanInfo) doPrivileged((PrivilegedExceptionAction) () -> Introspector.getBeanInfo(theClass, Introspector.IGNORE_ALL_BEANINFO));
+                info = (BeanInfo) doPrivileged(() -> Introspector.getBeanInfo(theClass, Introspector.IGNORE_ALL_BEANINFO));
             } else {
-                info = (BeanInfo) doPrivileged((PrivilegedExceptionAction) () -> Introspector.getBeanInfo(theClass));
+                info = (BeanInfo) doPrivileged(() -> Introspector.getBeanInfo(theClass));
             }
         } catch (PrivilegedActionException pae) {
             throw new GroovyRuntimeException("exception during bean introspection", pae.getException());

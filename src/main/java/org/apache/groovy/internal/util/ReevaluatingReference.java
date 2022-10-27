@@ -40,7 +40,7 @@ public class ReevaluatingReference<T> {
     static {
         try {
             //TODO Jochen: move the findSpecial to a central place together with others to easy security configuration
-            FALLBACK_HANDLE = doPrivileged((PrivilegedExceptionAction<MethodHandle>) () -> MethodHandles.lookup().findSpecial(
+            FALLBACK_HANDLE = doPrivileged(() -> MethodHandles.lookup().findSpecial(
                     ReevaluatingReference.class, "replacePayLoad",
                     MethodType.methodType(Object.class),
                     ReevaluatingReference.class));

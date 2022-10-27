@@ -3719,7 +3719,7 @@ public class StaticTypeCheckingVisitor extends ClassCodeVisitorSupport {
             if (candidates != null && !candidates.isEmpty()) {
                 ClassNode objExpType = getType(methodReference.getExpression());
                 if (isClassClassNodeWrappingConcreteType(objExpType)
-                        && candidates.stream().allMatch(mn -> !mn.isStatic())) {
+                        && candidates.stream().noneMatch(MethodNode::isStatic)) {
                     firstParamType = objExpType.getGenericsTypes()[0].getType();
                 }
             }
@@ -5682,7 +5682,7 @@ public class StaticTypeCheckingVisitor extends ClassCodeVisitorSupport {
         if (target instanceof ExtensionMethodNode && !((ExtensionMethodNode) target).isStaticExtension()) {
             params = ((ExtensionMethodNode) target).getExtensionMethodNode().getParameters();
         } else if (!target.isStatic() && source.getExpression() instanceof ClassExpression) {
-            ClassNode thisType = ((ClassExpression) source.getExpression()).getType();
+            ClassNode thisType = source.getExpression().getType();
             // there is an implicit parameter for "String::length"
             int n = target.getParameters().length;
             params = new Parameter[n + 1];

@@ -83,7 +83,7 @@ public class VerifierCodeVisitor extends CodeVisitorSupport {
 
     public static void assertValidIdentifier(String name, String message, ASTNode node) {
         int size = name.length();
-        if (size <= 0) {
+        if (size == 0) {
             throw new RuntimeParserException("Invalid " + message + ". Identifier must not be empty", node);
         }
         char firstCh = name.charAt(0);

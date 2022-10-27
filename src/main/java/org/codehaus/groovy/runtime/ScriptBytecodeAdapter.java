@@ -97,7 +97,7 @@ public class ScriptBytecodeAdapter {
                 }
             } catch (MissingMethodException e) {
                 if (e instanceof MissingMethodExecutionFailed) {
-                    throw (MissingMethodException)e.getCause();
+                    throw e.getCause();
                 } else if (!intercepting && receiver.getClass() == e.getType() && e.getMethod().equals(messageName)) {
                     // in case there's nothing else, invoke the object's own invokeMethod()
                     result = receiver.invokeMethod(messageName, messageArguments);
@@ -884,7 +884,7 @@ public class ScriptBytecodeAdapter {
 
     //regexpr
     public static Pattern regexPattern(Object regex) {
-        return StringGroovyMethods.bitwiseNegate((CharSequence)regex.toString());
+        return StringGroovyMethods.bitwiseNegate(regex.toString());
     }
 
     public static Matcher findRegex(Object left, Object right) throws Throwable {

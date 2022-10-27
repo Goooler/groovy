@@ -168,7 +168,7 @@ public class ProcessGroovyMethods extends DefaultGroovyMethodsSupport {
      * @since 1.0
      */
     public static void consumeProcessOutput(Process self) {
-        consumeProcessOutput(self, (OutputStream)null, (OutputStream)null);
+        consumeProcessOutput(self, null, (OutputStream)null);
     }
 
     /**
@@ -222,7 +222,7 @@ public class ProcessGroovyMethods extends DefaultGroovyMethodsSupport {
      * @since 1.6.5
      */
     public static void waitForProcessOutput(Process self) {
-        waitForProcessOutput(self, (OutputStream)null, (OutputStream)null);
+        waitForProcessOutput(self, null, (OutputStream)null);
     }
 
     /**

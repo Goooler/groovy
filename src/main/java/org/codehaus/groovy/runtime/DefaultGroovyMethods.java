@@ -3292,7 +3292,7 @@ public class DefaultGroovyMethods extends DefaultGroovyMethodsSupport {
      * @since 2.5.0
      */
     public static <T> List<List<T>> collate(T[] self, int size) {
-        return collate((Iterable<T>)Arrays.asList(self), size, true);
+        return collate(Arrays.asList(self), size, true);
     }
 
     /**
@@ -3324,7 +3324,7 @@ public class DefaultGroovyMethods extends DefaultGroovyMethodsSupport {
      * @since 2.5.0
      */
     public static <T> List<List<T>> collate(T[] self, int size, int step) {
-        return collate((Iterable<T>)Arrays.asList(self), size, step, true);
+        return collate(Arrays.asList(self), size, step, true);
     }
 
     /**
@@ -3356,7 +3356,7 @@ public class DefaultGroovyMethods extends DefaultGroovyMethodsSupport {
      * @since 2.5.0
      */
     public static <T> List<List<T>> collate(T[] self, int size, boolean keepRemainder) {
-        return collate((Iterable<T>)Arrays.asList(self), size, size, keepRemainder);
+        return collate(Arrays.asList(self), size, size, keepRemainder);
     }
 
     /**
@@ -3414,7 +3414,7 @@ public class DefaultGroovyMethods extends DefaultGroovyMethodsSupport {
      * @since 2.5.0
      */
     public static <T> List<List<T>> collate(T[] self, int size, int step, boolean keepRemainder) {
-        return collate((Iterable<T>)Arrays.asList(self), size, step, keepRemainder);
+        return collate(Arrays.asList(self), size, step, keepRemainder);
     }
 
     /**
@@ -8881,7 +8881,7 @@ public class DefaultGroovyMethods extends DefaultGroovyMethodsSupport {
     public static <K, V> Map<K, V> sort(Map<K, V> self, @ClosureParams(value=FromString.class, options={"Map.Entry<K,V>","Map.Entry<K,V>,Map.Entry<K,V>"}) Closure closure) {
         Map<K, V> result = new LinkedHashMap<>();
         List<Map.Entry<K, V>> entries = asList(self.entrySet());
-        sort((Iterable<Map.Entry<K, V>>) entries, closure);
+        sort(entries, closure);
         for (Map.Entry<K, V> entry : entries) {
             result.put(entry.getKey(), entry.getValue());
         }
@@ -8971,7 +8971,7 @@ public class DefaultGroovyMethods extends DefaultGroovyMethodsSupport {
      * @since 1.5.5
      */
     public static <T> Iterator<T> sort(Iterator<T> self) {
-        return sort((Iterable<T>) toList(self)).listIterator();
+        return sort(toList(self)).listIterator();
     }
 
     /**
@@ -9068,7 +9068,7 @@ public class DefaultGroovyMethods extends DefaultGroovyMethodsSupport {
      * @since 1.5.5
      */
     public static <T> Iterator<T> sort(Iterator<T> self, @ClosureParams(value=FromString.class, options={"T","T,T"}) Closure closure) {
-        return sort((Iterable<T>) toList(self), closure).listIterator();
+        return sort(toList(self), closure).listIterator();
     }
 
     /**
@@ -11398,7 +11398,7 @@ public class DefaultGroovyMethods extends DefaultGroovyMethodsSupport {
     @SuppressWarnings("unchecked")
     public static <T> T asType(Iterable iterable, Class<T> clazz) {
         if (Collection.class.isAssignableFrom(clazz)) {
-            return asType((Collection) toList(iterable), clazz);
+            return asType(toList(iterable), clazz);
         }
 
         return asType((Object) iterable, clazz);
@@ -13119,7 +13119,7 @@ public class DefaultGroovyMethods extends DefaultGroovyMethodsSupport {
             return minus(self, removeMe[0]);
           default:
             Collection<T> temp = minus((Collection<T>) toList(self), Arrays.asList(removeMe));
-            return (T[]) temp.toArray(createSimilarArray(self, temp.size()));
+            return temp.toArray(createSimilarArray(self, temp.size()));
         }
     }
 

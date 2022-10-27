@@ -94,7 +94,7 @@ class GroovyClassValuePreJava7<T> implements GroovyClassValue<T> {
 	@Override
 	public T get(Class<?> type) {
 		// the value isn't use in the getOrPut call - see the EntryWithValue constructor above
-		T value = ((EntryWithValue)map.getOrPut(type, null)).getValue();
+		T value = map.getOrPut(type, null).getValue();
 		//all entries are guaranteed to be EntryWithValue. Value can only be null if computeValue returns null
 		return value;
 	}

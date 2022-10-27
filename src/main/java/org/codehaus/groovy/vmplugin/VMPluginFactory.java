@@ -60,7 +60,7 @@ public class VMPluginFactory {
     }
 
     private static VMPlugin createPlugin() {
-        return doPrivileged((PrivilegedAction<VMPlugin>) () -> {
+        return doPrivileged(() -> {
             final BigDecimal specVer = new BigDecimal(VMPlugin.getJavaVersion());
             ClassLoader loader = VMPluginFactory.class.getClassLoader();
             for (Map.Entry<BigDecimal, String> entry : PLUGIN_MAP.entrySet()) {

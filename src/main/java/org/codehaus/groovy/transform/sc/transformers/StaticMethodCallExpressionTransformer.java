@@ -33,7 +33,7 @@ public class StaticMethodCallExpressionTransformer {
     }
 
     Expression transformStaticMethodCallExpression(final StaticMethodCallExpression orig) {
-        MethodNode target = (MethodNode) orig.getNodeMetaData(StaticTypesMarker.DIRECT_METHOD_CALL_TARGET);
+        MethodNode target = orig.getNodeMetaData(StaticTypesMarker.DIRECT_METHOD_CALL_TARGET);
         if (target != null) {
             MethodCallExpression call = new MethodCallExpression(
                     new ClassExpression(orig.getOwnerType()),

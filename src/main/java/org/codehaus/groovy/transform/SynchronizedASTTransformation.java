@@ -110,7 +110,7 @@ public class SynchronizedASTTransformation extends AbstractASTTransformation {
     }
 
     private static Expression zeroLengthObjectArray() {
-        return new ArrayExpression(ClassHelper.OBJECT_TYPE, null, Collections.singletonList((Expression) constX(0)));
+        return new ArrayExpression(ClassHelper.OBJECT_TYPE, null, Collections.singletonList(constX(0)));
     }
 
 }

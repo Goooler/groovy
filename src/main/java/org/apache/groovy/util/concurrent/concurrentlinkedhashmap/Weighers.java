@@ -106,7 +106,7 @@ public final class Weighers {
    */
   @SuppressWarnings({"cast", "unchecked"})
   public static <E> Weigher<? super Iterable<E>> iterable() {
-    return (Weigher<Iterable<E>>) (Weigher<?>) IterableWeigher.INSTANCE;
+    return (Weigher<?>) IterableWeigher.INSTANCE;
   }
 
   /**
@@ -124,7 +124,7 @@ public final class Weighers {
    */
   @SuppressWarnings({"cast", "unchecked"})
   public static <E> Weigher<? super Collection<E>> collection() {
-    return (Weigher<Collection<E>>) (Weigher<?>) CollectionWeigher.INSTANCE;
+    return (Weigher<?>) CollectionWeigher.INSTANCE;
   }
 
   /**
@@ -142,7 +142,7 @@ public final class Weighers {
    */
   @SuppressWarnings({"cast", "unchecked"})
   public static <E> Weigher<? super List<E>> list() {
-    return (Weigher<List<E>>) (Weigher<?>) ListWeigher.INSTANCE;
+    return (Weigher<?>) ListWeigher.INSTANCE;
   }
 
   /**
@@ -160,7 +160,7 @@ public final class Weighers {
    */
   @SuppressWarnings({"cast", "unchecked"})
   public static <E> Weigher<? super Set<E>> set() {
-    return (Weigher<Set<E>>) (Weigher<?>) SetWeigher.INSTANCE;
+    return (Weigher<?>) SetWeigher.INSTANCE;
   }
 
   /**
@@ -178,7 +178,7 @@ public final class Weighers {
    */
   @SuppressWarnings({"cast", "unchecked"})
   public static <A, B> Weigher<? super Map<A, B>> map() {
-    return (Weigher<Map<A, B>>) (Weigher<?>) MapWeigher.INSTANCE;
+    return (Weigher<?>) MapWeigher.INSTANCE;
   }
 
   static final class EntryWeigherView<K, V> implements EntryWeigher<K, V>, Serializable {

@@ -50,7 +50,7 @@ public class SingleKeyHashMap extends ComplexKeyHashMap
     ComplexKeyHashMap.Entry e = table [h & (table.length-1)];
     for (; e != null; e = e.next)
         if (e.hash == h && ((Entry) e).key.equals(key))
-          return ((Entry)e).value;
+          return e.value;
 
     return null;
   }
@@ -75,7 +75,7 @@ public class SingleKeyHashMap extends ComplexKeyHashMap
       resize(2* t.length);
 
     return entry;
-  }                                                    
+  }
 
     public Entry getOrPutEntry(Entry element) {
         Object key = element.key;
