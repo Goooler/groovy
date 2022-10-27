@@ -453,8 +453,7 @@ public class TraitASTTransformation extends AbstractASTTransformation implements
         // method is in current class, nothing to be done
         if (mNode.getDeclaringClass() == cNode) return false;
         // do not overwrite final
-        if ((mNode.getModifiers() & ACC_FINAL) != 0) return false;
-        return true;
+        return (mNode.getModifiers() & ACC_FINAL) == 0;
     }
 
     private void processField(final FieldNode field, final MethodNode initializer, final MethodNode staticInitializer,

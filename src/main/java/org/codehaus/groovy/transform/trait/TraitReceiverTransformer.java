@@ -324,8 +324,8 @@ class TraitReceiverTransformer extends ClassCodeExpressionTransformer {
         }
 
         MethodCallExpression newCall = callX(inClosure ? thisExpr : weaved, method, transform(arguments));
-        newCall.setImplicitThis(inClosure ? call.isImplicitThis() : false);
-        newCall.setSafe(inClosure ? call.isSafe() : false);
+        newCall.setImplicitThis(inClosure && call.isImplicitThis());
+        newCall.setSafe(inClosure && call.isSafe());
         newCall.setSpreadSafe(call.isSpreadSafe());
         newCall.setSourcePosition(call);
         return newCall;

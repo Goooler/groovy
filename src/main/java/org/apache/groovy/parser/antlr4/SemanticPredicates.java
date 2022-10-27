@@ -98,14 +98,9 @@ public class SemanticPredicates {
         int c2 = cs.LA(2);
         String str2 = String.valueOf((char) c2);
 
-        if (matches(str1, SURROGATE_PAIR1_PATTERN)
+        return matches(str1, SURROGATE_PAIR1_PATTERN)
                 && matches(str2, SURROGATE_PAIR2_PATTERN)
-                && Character.isJavaIdentifierPart(Character.toCodePoint((char) c1, (char) c2))) {
-
-            return true;
-        }
-
-        return false;
+                && Character.isJavaIdentifierPart(Character.toCodePoint((char) c1, (char) c2));
     }
 
     /**

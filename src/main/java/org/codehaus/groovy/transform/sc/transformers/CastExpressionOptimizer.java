@@ -72,9 +72,6 @@ public class CastExpressionOptimizer {
         if (StaticTypeCheckingSupport.implementsInterfaceOrIsSubclassOf(exprInferredType, castType)) {
             return true;
         }
-        if (ClassHelper.isPrimitiveType(exprInferredType) && ClassHelper.isPrimitiveType(castType)) {
-            return true;
-        }
-        return false;
+        return ClassHelper.isPrimitiveType(exprInferredType) && ClassHelper.isPrimitiveType(castType);
     }
 }

@@ -280,9 +280,7 @@ public abstract class StaticTypeCheckingSupport {
     public static boolean isWithCall(final String name, final Expression arguments) {
         if ("with".equals(name) && arguments instanceof ArgumentListExpression) {
             List<Expression> args = ((ArgumentListExpression) arguments).getExpressions();
-            if (args.size() == 1 && args.get(0) instanceof ClosureExpression) {
-                return true;
-            }
+            return args.size() == 1 && args.get(0) instanceof ClosureExpression;
         }
         return false;
     }
@@ -740,10 +738,7 @@ public abstract class StaticTypeCheckingSupport {
         // if right is array, map or collection we try invoking the constructor
         if (allowConstructorCoercion && isGroovyConstructorCompatible(rightExpression)) {
             // TODO: in case of the array we could maybe make a partial check
-            if (rightRedirect.isArray() && !leftRedirect.isArray()) {
-                return false;
-            }
-            return true;
+            return !rightRedirect.isArray() || leftRedirect.isArray();
         }
 
         if (implementsInterfaceOrSubclassOf(getWrapper(right), left)) {
@@ -909,10 +904,8 @@ public abstract class StaticTypeCheckingSupport {
                 }
             }
         }
-        if (isGroovyObjectType(superOrInterface) && isBeingCompiled(type) && !type.isInterface()) {//TODO: !POJO !Trait
-            return true;
-        }
-        return false;
+        //TODO: !POJO !Trait
+        return isGroovyObjectType(superOrInterface) && isBeingCompiled(type) && !type.isInterface();
     }
 
     static int getPrimitiveDistance(ClassNode primA, ClassNode primB) {
@@ -1319,10 +1312,8 @@ public abstract class StaticTypeCheckingSupport {
                 return true;
             }
             ClassNode oc = cn.getOuterClass();
-            if (oc != null && oc.getGenericsTypes() != null
-                    && (cn.getModifiers() & Opcodes.ACC_STATIC) == 0) {
-                return true;
-            }
+            return oc != null && oc.getGenericsTypes() != null
+                && (cn.getModifiers() & Opcodes.ACC_STATIC) == 0;
         }
         return false;
     }
@@ -1413,7 +1404,7 @@ public abstract class StaticTypeCheckingSupport {
             GenericsType gt = GenericsUtils.buildWildcardType(parameterType);
             if (!gt.isCompatibleWith(argumentType)) {
                 boolean samCoercion = isSAMType(parameterType) && argumentType.equals(CLOSURE_TYPE);
-                if (!samCoercion) return false;
+                return samCoercion;
             }
         } else if (parameterType.isArray() && argumentType.isArray()) {
             // verify component type

@@ -276,9 +276,7 @@ public class ProxyGenerator {
             if (!Objects.equals(baseClass, cacheKey.baseClass)) return false;
             if (!Objects.equals(delegateClass, cacheKey.delegateClass)) return false;
             if (!Arrays.equals(interfaces, cacheKey.interfaces)) return false;
-            if (!Objects.equals(methods, cacheKey.methods)) return false;
-
-            return true;
+            return Objects.equals(methods, cacheKey.methods);
         }
 
         @Override

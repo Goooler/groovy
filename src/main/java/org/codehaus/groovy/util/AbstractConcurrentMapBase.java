@@ -286,21 +286,21 @@ public abstract class AbstractConcurrentMapBase {
         private static void put(Entry ee, int index, Object[] tab) {
             Object o = tab[index];
             if (o != null) {
+                Object[] arr;
                 if (o instanceof Entry) {
-                    Object[] arr = new Object [2];
+                    arr = new Object[2];
                     arr [0] = ee;
                     arr [1] = o;
                     tab[index] = arr;
-                    return;
                 }
                 else {
-                    Object[] arr = (Object[]) o;
+                    arr = (Object[]) o;
                     Object[] newArr = new Object[arr.length+1];
                     newArr [0] = ee;
                     System.arraycopy(arr, 0, newArr, 1, arr.length);
                     tab [index] = newArr;
-                    return;
                 }
+                return;
             }
             tab[index] = ee;
         }

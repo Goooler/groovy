@@ -244,9 +244,7 @@ public class ParameterTypes {
             return isValidVargsMethod(argumentTypes, pt, nthParameter);
         else if (nArguments == nParameters)
             return isValidExactMethod(argumentTypes, pt);
-        else if (nArguments == 0 && nParameters == 1 && !pt[0].isPrimitive)
-            return true; // implicit null argument
-        return false;
+        else return nArguments == 0 && nParameters == 1 && !pt[0].isPrimitive; // implicit null argument
     }
 
     private static boolean isValidExactMethod(Class[] arguments, CachedClass[] pt) {
@@ -356,10 +354,7 @@ public class ParameterTypes {
                 }
             }
             return true;
-        } else if (nArguments == 0 && nParameters == 1 && !parameterTypes[0].isPrimitive) {
-            return true; // implicit null argument
-        }
-        return false;
+        } else return nArguments == 0 && nParameters == 1 && !parameterTypes[0].isPrimitive; // implicit null argument
     }
 
     private static Class getArgClass(Object arg) {

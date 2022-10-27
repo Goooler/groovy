@@ -1048,9 +1048,7 @@ public class AsmClassGenerator extends ClassGenerator {
         if (Modifier.isProtected(modifiers) && accessingClass.isDerivedFrom(declaringClass)) return true;
 
         // a protected or package-private member is accessible from the declaring package
-        if (Objects.equals(accessingClass.getPackageName(), declaringClass.getPackageName())) return true;
-
-        return false;
+        return Objects.equals(accessingClass.getPackageName(), declaringClass.getPackageName());
     }
 
     public static FieldNode getDeclaredFieldOfCurrentClassOrAccessibleFieldOfSuper(final ClassNode accessingNode, final ClassNode current, final String fieldName, final boolean skipCurrent) {

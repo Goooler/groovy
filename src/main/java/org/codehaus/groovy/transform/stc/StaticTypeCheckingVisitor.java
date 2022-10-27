@@ -552,9 +552,7 @@ public class StaticTypeCheckingVisitor extends ClassCodeVisitorSupport {
             ClassNode type = (ClassNode) node;
             if (type.getOuterClass() != null) {
                 MethodNode enclosingMethod = type.getEnclosingMethod();
-                if (enclosingMethod != null && isSkipMode(enclosingMethod)) {
-                    return true;
-                }
+                return enclosingMethod != null && isSkipMode(enclosingMethod);
             }
         }
         return false;
@@ -1561,7 +1559,7 @@ public class StaticTypeCheckingVisitor extends ClassCodeVisitorSupport {
                     Collections.addAll(queue, current.getInterfaces());
                 }
 
-                boolean staticOnly = (receiver.getData() == null ? staticOnlyAccess : false);
+                boolean staticOnly = (receiver.getData() == null && staticOnlyAccess);
                 // in case of a lookup on java.lang.Class, look for instance methods on Class
                 // as well; in case of static property access Class<Type> and Type are listed
                 if (isClassClassNodeWrappingConcreteType(current)) staticOnly = false;
@@ -2613,7 +2611,7 @@ public class StaticTypeCheckingVisitor extends ClassCodeVisitorSupport {
             boolean osc = typeCheckingContext.isInStaticContext;
             try {
                 // GROOVY-7890: non-static trait method is static in helper type
-                typeCheckingContext.isInStaticContext = isNonStaticHelperMethod(node) ? false : node.isStatic();
+                typeCheckingContext.isInStaticContext = !isNonStaticHelperMethod(node) && node.isStatic();
 
                 super.visitMethod(node);
             } finally {
@@ -4251,9 +4249,7 @@ public class StaticTypeCheckingVisitor extends ClassCodeVisitorSupport {
             return true;
         } else if (!Modifier.isFinal(targetType.getModifiers()) && expressionType.isInterface()) {
             return true;
-        } else if (!isAssignableTo(targetType, expressionType) && !implementsInterfaceOrIsSubclassOf(expressionType, targetType)) {
-            return false;
-        }
+        } else return isAssignableTo(targetType, expressionType) || implementsInterfaceOrIsSubclassOf(expressionType, targetType);
         return true;
     }
 
@@ -6053,12 +6049,10 @@ public class StaticTypeCheckingVisitor extends ClassCodeVisitorSupport {
 
     public static class SignatureCodecFactory {
         public static SignatureCodec getCodec(final int version, final ClassLoader classLoader) {
-            switch (version) {
-              case 1:
+            if (version == 1) {
                 return new SignatureCodecVersion1(classLoader);
-              default:
-                return null;
             }
+            return null;
         }
     }
 

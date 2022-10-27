@@ -108,11 +108,10 @@ public class WriterController {
         if (this.optimizeForInt) {
             this.fastPathBinaryExpHelper = new BinaryExpressionMultiTypeDispatcher(this);
             // TODO: replace with a real fast path unary expression helper when available
-            this.fastPathUnaryExpressionHelper = new UnaryExpressionHelper(this);
         } else {
             this.fastPathBinaryExpHelper = this.binaryExpHelper;
-            this.fastPathUnaryExpressionHelper = new UnaryExpressionHelper(this);
         }
+        this.fastPathUnaryExpressionHelper = new UnaryExpressionHelper(this);
 
         this.operandStack = new OperandStack(this);
         this.assertionWriter = new AssertionWriter(this);

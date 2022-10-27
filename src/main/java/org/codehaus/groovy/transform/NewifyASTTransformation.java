@@ -494,9 +494,7 @@ public class NewifyASTTransformation extends ClassCodeExpressionTransformer impl
 
             // Global classes
             final ClassNode globalType = nameToGlobalClassesNodesMap.get(methodName);
-            if (globalType != null) {
-                return globalType;
-            }
+            return globalType;
         }
 
         return null;

@@ -269,9 +269,7 @@ public class DelegateASTTransformation extends AbstractASTTransformation {
 
             if (javaObjectMethods.contains(candidate.getTypeDescriptor())) return true;
 
-            if (ownClassMethods.contains(candidate.getTypeDescriptor())) return true;
-
-            return false;
+            return ownClassMethods.contains(candidate.getTypeDescriptor());
         });
 
         return methods;

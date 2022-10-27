@@ -379,9 +379,7 @@ public class BytecodeHelper {
 
     private static boolean usesGenericsInTypeSignature(ClassNode node) {
         if (!node.isUsingGenerics()) return false;
-        if (hasGenerics(node)) return true;
-
-        return false;
+        return hasGenerics(node);
     }
 
     public static String getGenericsSignature(ClassNode node) {

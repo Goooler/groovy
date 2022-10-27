@@ -80,12 +80,10 @@ public class FinalVariableAnalyzer extends ClassCodeVisitorSupport {
         }
 
         public VariableState getNext() {
-            switch (this) {
-                case is_uninitialized:
-                    return is_final;
-                default:
-                    return is_var;
+            if (this == VariableState.is_uninitialized) {
+                return is_final;
             }
+            return is_var;
         }
 
         public boolean isFinal() {
@@ -452,10 +450,7 @@ public class FinalVariableAnalyzer extends ClassCodeVisitorSupport {
             return false;
         }
         Statement last = DefaultGroovyMethods.last(bs.getStatements());
-        if (last instanceof ReturnStatement || last instanceof ThrowStatement) {
-            return true;
-        }
-        return false;
+        return last instanceof ReturnStatement || last instanceof ThrowStatement;
     }
 
     /**

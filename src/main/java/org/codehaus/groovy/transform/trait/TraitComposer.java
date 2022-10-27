@@ -556,11 +556,8 @@ public abstract class TraitComposer {
     }
 
     private static boolean shouldSkipMethod(final ClassNode cNode, final String name, final Parameter[] params) {
-        if (isExistingProperty(name, cNode, params) || findExistingMethod(cNode, name, params) != null) {
-            // override exists in the weaved class itself
-            return true;
-        }
-        return false;
+        // override exists in the weaved class itself
+        return isExistingProperty(name, cNode, params) || findExistingMethod(cNode, name, params) != null;
     }
 
     private static boolean isExistingProperty(final String methodName, final ClassNode cNode, final Parameter[] params) {

@@ -59,7 +59,7 @@ public class DefaultTypeCheckingExtension extends TypeCheckingExtension {
     }
 
     public boolean addHandler(final TypeCheckingExtension handler) {
-        return !handlers.contains(handler) ? handlers.add(handler) : false;
+        return !handlers.contains(handler) && handlers.add(handler);
     }
 
     public void removeHandler(final TypeCheckingExtension handler) {

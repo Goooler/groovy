@@ -335,7 +335,7 @@ public class StaticTypesMethodReferenceExpressionWriter extends MethodReferenceE
                 int nParameters = parameters.length;
                 if (samParameters.length == nParameters - 1) { // 0 case
                     parameters = Arrays.copyOf(parameters, nParameters - 1);
-                    if (parametersCompatible(samParameters, parameters)) return false;
+                    return !parametersCompatible(samParameters, parameters);
                 }
                 else if (samParameters.length >= nParameters) { // 1+ case
                     Parameter p = new Parameter(parameters[nParameters - 1].getType().getComponentType(), "");
@@ -343,7 +343,7 @@ public class StaticTypesMethodReferenceExpressionWriter extends MethodReferenceE
                     for (int i = nParameters - 1; i < parameters.length; i += 1){
                         parameters[i] = p;
                     }
-                    if (parametersCompatible(samParameters, parameters)) return false;
+                    return !parametersCompatible(samParameters, parameters);
                 }
             }
 

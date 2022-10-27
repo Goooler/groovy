@@ -607,9 +607,7 @@ public class Java8 implements VMPlugin {
 
         if (accessibleObject instanceof Constructor) {
             Constructor<?> c = (Constructor<?>) accessibleObject;
-            if (c.getDeclaringClass() == Class.class) {
-                return false; // Cannot make a java.lang.Class constructor accessible
-            }
+            return c.getDeclaringClass() != Class.class; // Cannot make a java.lang.Class constructor accessible
         }
 
         return true;

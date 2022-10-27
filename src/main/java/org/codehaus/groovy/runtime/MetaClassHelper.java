@@ -937,9 +937,7 @@ public class MetaClassHelper {
         if (params.length != 1)
             return false;
 
-        if (params[0] != getClassWithNullAndWrapper(arg1)) return false;
-
-        return true;
+        return params[0] == getClassWithNullAndWrapper(arg1);
     }
 
     public static boolean sameClasses(Class[] params, Object arg1, Object arg2) {

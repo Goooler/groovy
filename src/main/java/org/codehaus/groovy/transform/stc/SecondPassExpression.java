@@ -57,9 +57,7 @@ class SecondPassExpression<T> {
         final SecondPassExpression that = (SecondPassExpression) o;
 
         if (!Objects.equals(data, that.data)) return false;
-        if (!expression.equals(that.expression)) return false;
-
-        return true;
+        return expression.equals(that.expression);
     }
 
     @Override

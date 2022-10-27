@@ -179,9 +179,7 @@ class BooleanExpressionTransformer {
                     MethodNode theAsBoolean = asBoolean.get(0);
                     if (theAsBoolean instanceof ExtensionMethodNode) {
                         ClassNode selfType = (((ExtensionMethodNode) theAsBoolean).getExtensionMethodNode()).getParameters()[0].getType();
-                        if (ClassHelper.isObjectType(selfType)) {
-                            return true;
-                        }
+                        return ClassHelper.isObjectType(selfType);
                     }
                 }
             }

@@ -200,9 +200,7 @@ public class MixinInMetaClass {
 
         MixinInMetaClass that = (MixinInMetaClass) o;
 
-        if (!Objects.equals(mixinClass, that.mixinClass)) return false;
-
-        return true;
+        return Objects.equals(mixinClass, that.mixinClass);
     }
 
     @Override

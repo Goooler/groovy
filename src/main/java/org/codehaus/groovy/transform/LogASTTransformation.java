@@ -181,8 +181,7 @@ public class LogASTTransformation extends AbstractASTTransformation implements C
 
             private boolean isSimpleExpression(final Expression exp) {
                 if (exp instanceof ConstantExpression) return true;
-                if (exp instanceof VariableExpression) return true;
-                return false;
+                return exp instanceof VariableExpression;
             }
 
         };

@@ -761,8 +761,7 @@ public class Verifier implements GroovyClassVisitor, Opcodes {
         // method is in current class, nothing to be done
         if (m.getDeclaringClass() == getClassNode()) return false;
         // do not overwrite final
-        if (isFinal(m.getModifiers())) return false;
-        return true;
+        return !isFinal(m.getModifiers());
     }
 
     @Override

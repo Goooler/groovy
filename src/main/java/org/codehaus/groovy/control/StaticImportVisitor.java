@@ -274,11 +274,8 @@ public class StaticImportVisitor extends ClassCodeExpressionTransformer {
                     return true;
                 }
                 // GROOVY-9587: don't check for property for non-empty call args
-                if (args instanceof TupleExpression && ((TupleExpression) args).getExpressions().isEmpty()
-                        && hasPossibleStaticProperty(cn, methodName)) {
-                    return true;
-                }
-                return false;
+                return args instanceof TupleExpression && ((TupleExpression) args).getExpressions().isEmpty()
+                        && hasPossibleStaticProperty(cn, methodName);
             };
 
             if (mce.isImplicitThis()) {

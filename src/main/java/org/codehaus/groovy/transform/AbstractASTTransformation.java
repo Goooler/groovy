@@ -175,11 +175,8 @@ public abstract class AbstractASTTransformation implements ASTTransformation, Er
         if (itemExpr == null) return false;
         if (itemExpr instanceof ConstantExpression) {
             Object value = ((ConstantExpression) itemExpr).getValue();
-            if (value instanceof String && isUndefined((String)value)) return true;
-        } else if (itemExpr instanceof ClassExpression && isUndefined(itemExpr.getType())) {
-            return true;
-        }
-        return false;
+            return value instanceof String && isUndefined((String) value);
+        } else return itemExpr instanceof ClassExpression && isUndefined(itemExpr.getType());
     }
 
     private static List<String> getValueStringList(ListExpression listExpression) {

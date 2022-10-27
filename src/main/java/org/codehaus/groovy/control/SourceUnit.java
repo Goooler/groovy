@@ -139,8 +139,7 @@ public class SourceUnit extends ProcessingUnit {
         // Implementation note - there are several ways for the Groovy compiler
         // to report an unexpected EOF. Perhaps this implementation misses some.
         // If you find another way, please add it.
-        if (getErrorCollector().hasErrors()) {
-            /*
+        /*
             Message last = (Message) getErrorCollector().getLastError();
             Throwable cause = null;
             if (last instanceof SyntaxErrorMessage) {
@@ -160,9 +159,7 @@ public class SourceUnit extends ProcessingUnit {
                 }
             }
             */
-            return true;
-        }
-        return false;
+        return getErrorCollector().hasErrors();
     }
 
     /*protected boolean isEofToken(groovyjarjarantlr.Token token) {

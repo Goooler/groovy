@@ -416,8 +416,7 @@ public class StaticInvocationWriter extends InvocationWriter {
         if (receiver == null) return false;
         if (receiver.redirect() == caller) return true;
         if (isPrivateBridgeMethodsCallAllowed(receiver.getOuterClass(), caller)) return true;
-        if (caller.getOuterClass() != null && isPrivateBridgeMethodsCallAllowed(receiver, caller.getOuterClass())) return true;
-        return false;
+        return caller.getOuterClass() != null && isPrivateBridgeMethodsCallAllowed(receiver, caller.getOuterClass());
     }
 
     @Override

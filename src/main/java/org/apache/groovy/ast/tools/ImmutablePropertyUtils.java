@@ -234,7 +234,7 @@ public class ImmutablePropertyUtils {
                 immutables.add((String) ((ConstantExpression) listItemExpression).getValue());
             }
         }
-        if (!xform.checkPropertyList(cNode, immutables, "knownImmutables", anno, "immutable class", false)) return immutables;
+        xform.checkPropertyList(cNode, immutables, "knownImmutables", anno, "immutable class", false);
 
         return immutables;
     }

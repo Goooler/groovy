@@ -339,9 +339,7 @@ public class StaticTypesBinaryExpressionMultiTypeDispatcher extends BinaryExpres
             if (isThisExpression && !controller.isInGeneratedFunction()) {
                 receiverType = controller.getClassNode();
             }
-            if (makeSetPrivateFieldWithBridgeMethod(receiver, receiverType, property, arguments, safe, spreadSafe, implicitThis)) {
-                return true;
-            }
+            return makeSetPrivateFieldWithBridgeMethod(receiver, receiverType, property, arguments, safe, spreadSafe, implicitThis);
         }
         return false;
     }

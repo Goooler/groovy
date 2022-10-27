@@ -3839,9 +3839,7 @@ public class MetaClassImpl implements MetaClass, MutableMetaClass {
             return method;
         }
 
-        if (methodC.isAssignableFrom(newMethodC)) {
-            return newMethod;
-        }
+        methodC.isAssignableFrom(newMethodC);
 
         return newMethod;
     }
