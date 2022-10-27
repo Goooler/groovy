@@ -47,12 +47,12 @@ public class GroovyCodeSource {
      * The codeSource to be given the generated class.  This can be used by policy file
      * grants to administer security.
      */
-    private CodeSource codeSource;
+    private final CodeSource codeSource;
 
     /**
      * The name given to the generated class
      */
-    private String name;
+    private final String name;
 
     /**
      * The groovy source to be compiled and turned into a class
@@ -104,14 +104,14 @@ public class GroovyCodeSource {
         // avoid files which confuse us like ones with .. in path
         final File file = new File(infile.getCanonicalPath());
         if (!file.exists()) {
-            throw new FileNotFoundException(file.toString() + " (" + file.getAbsolutePath() + ")");
+            throw new FileNotFoundException(file + " (" + file.getAbsolutePath() + ")");
         }
         if (file.isDirectory()) {
-            throw new IllegalArgumentException(file.toString() + " (" + file.getAbsolutePath() + ") is a directory not a Groovy source file.");
+            throw new IllegalArgumentException(file + " (" + file.getAbsolutePath() + ") is a directory not a Groovy source file.");
         }
         try {
             if (!file.canRead())
-                throw new RuntimeException(file.toString() + " can not be read. Check the read permission of the file \"" + file.toString() + "\" (" + file.getAbsolutePath() + ").");
+                throw new RuntimeException(file + " can not be read. Check the read permission of the file \"" + file + "\" (" + file.getAbsolutePath() + ").");
         }
         catch (SecurityException e) {
             throw e;

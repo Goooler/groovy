@@ -36,7 +36,7 @@ import org.antlr.v4.runtime.misc.ParseCancellationException;
  * Provide friendly error messages when parsing errors occurred.
  */
 public class DescriptiveErrorStrategy extends BailErrorStrategy {
-    private CharStream charStream;
+    private final CharStream charStream;
 
     public DescriptiveErrorStrategy(CharStream charStream) {
         this.charStream = charStream;

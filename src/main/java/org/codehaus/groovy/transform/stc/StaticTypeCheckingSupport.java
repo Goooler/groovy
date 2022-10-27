@@ -1768,7 +1768,8 @@ public abstract class StaticTypeCheckingSupport {
             if (di.isPlaceholder()) {
                 storeGenericsConnection(connections, di.getName(), ui);
             } else if (di.isWildcard()) {
-                ClassNode lowerBound = di.getLowerBound(), upperBounds[] = di.getUpperBounds();
+                ClassNode lowerBound = di.getLowerBound();
+                ClassNode[] upperBounds = di.getUpperBounds();
                 if (ui.isWildcard()) {
                     extractGenericsConnections(connections, ui.getLowerBound(), lowerBound);
                     extractGenericsConnections(connections, ui.getUpperBounds(), upperBounds);

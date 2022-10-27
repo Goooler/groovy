@@ -46,7 +46,7 @@ public class CachedClass {
 
     public static final CachedClass[] EMPTY_ARRAY = new CachedClass[0];
 
-    private static ReferenceBundle softBundle = ReferenceBundle.getSoftBundle();
+    private static final ReferenceBundle softBundle = ReferenceBundle.getSoftBundle();
 
     private final LazyReference<CachedField[]> fields = new LazyReference<CachedField[]>(softBundle) {
         private static final long serialVersionUID = 5450437842165410025L;
@@ -60,7 +60,7 @@ public class CachedClass {
         }
     };
 
-    private LazyReference<CachedConstructor[]> constructors = new LazyReference<CachedConstructor[]>(softBundle) {
+    private final LazyReference<CachedConstructor[]> constructors = new LazyReference<CachedConstructor[]>(softBundle) {
         private static final long serialVersionUID = -5834446523983631635L;
 
         @Override
@@ -118,7 +118,7 @@ public class CachedClass {
         }
     };
 
-    private LazyReference<CachedClass> cachedSuperClass = new LazyReference<CachedClass>(softBundle) {
+    private final LazyReference<CachedClass> cachedSuperClass = new LazyReference<CachedClass>(softBundle) {
         private static final long serialVersionUID = -4663740963306806058L;
 
         @Override

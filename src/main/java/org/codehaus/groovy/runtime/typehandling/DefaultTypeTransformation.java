@@ -576,7 +576,7 @@ public class DefaultTypeTransformation {
     }
 
     static class ArrayToUnmodifiableListAdapter implements List {
-        private Object delegate;
+        private final Object delegate;
 
         public ArrayToUnmodifiableListAdapter(Object delegate) {
             Objects.requireNonNull(delegate);

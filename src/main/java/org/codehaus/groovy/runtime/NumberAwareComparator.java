@@ -31,7 +31,7 @@ import java.util.Comparator;
  */
 public class NumberAwareComparator<T> implements Comparator<T>, Serializable {
     private static final long serialVersionUID = 9017657289076651660L;
-    private boolean ignoreZeroSign;
+    private final boolean ignoreZeroSign;
 
     public NumberAwareComparator() {
         this(false);

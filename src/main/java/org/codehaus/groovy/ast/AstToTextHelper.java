@@ -60,7 +60,7 @@ public class AstToTextHelper {
         for (ClassNode exception : exceptions) {
             result.add(getClassText(exception));
         }
-        return " throws " + result.toString();
+        return " throws " + result;
     }
 
     public static String getModifiersText(final int modifiers) {

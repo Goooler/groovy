@@ -288,7 +288,7 @@ public final class ASTTransformationVisitor extends ClassCodeVisitorSupport {
                     } catch (IOException ioe) {
                         compilationUnit.getErrorCollector().addError(new SimpleMessage(
                                 "IOException reading the service definition at "
-                                        + service.toExternalForm() + " because of exception " + ioe.toString(), null));
+                                        + service.toExternalForm() + " because of exception " + ioe, null));
                         continue;
                     }
                     Set<String> disabledGlobalTransforms = compilationUnit.getConfiguration().getDisabledGlobalASTTransformations();
@@ -312,7 +312,7 @@ public final class ASTTransformationVisitor extends ClassCodeVisitorSupport {
                                     } catch (URISyntaxException e) {
                                         compilationUnit.getErrorCollector().addWarning(
                                                 WarningMessage.POSSIBLE_ERRORS,
-                                                "Failed to parse URL as URI because of exception " + e.toString(),
+                                                "Failed to parse URL as URI because of exception " + e,
                                                 null,
                                                 null);
                                     }
@@ -326,7 +326,7 @@ public final class ASTTransformationVisitor extends ClassCodeVisitorSupport {
                         } catch (IOException ioe) {
                             compilationUnit.getErrorCollector().addError(new SimpleMessage(
                                     "IOException reading the service definition at "
-                                            + service.toExternalForm() + " because of exception " + ioe.toString(), null));
+                                            + service.toExternalForm() + " because of exception " + ioe, null));
                         }
                     }
                 }

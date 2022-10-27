@@ -125,8 +125,8 @@ public class ProxyGeneratorAdapter extends ClassVisitor {
     private static final String DELEGATE_OBJECT_FIELD = "$delegate";
     private static final AtomicLong proxyCounter = new AtomicLong();
 
-    private static List<Method> OBJECT_METHODS = getInheritedMethods(Object.class, new ArrayList<>());
-    private static List<Method> GROOVYOBJECT_METHODS = getInheritedMethods(GroovyObject.class, new ArrayList<>());
+    private static final List<Method> OBJECT_METHODS = getInheritedMethods(Object.class, new ArrayList<>());
+    private static final List<Method> GROOVYOBJECT_METHODS = getInheritedMethods(GroovyObject.class, new ArrayList<>());
     private static final Set<String> GROOVYOBJECT_METHOD_NAMES;
     static {
         Set<String> names = new HashSet<>();

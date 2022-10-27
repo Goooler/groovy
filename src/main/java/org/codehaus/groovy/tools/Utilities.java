@@ -70,8 +70,8 @@ public abstract class Utilities
             if (!Character.isJavaIdentifierPart(chars[i])) return false;
         }
         return true;
-    }    
+    }
 
-    private static String eol = System.lineSeparator();
+    private static final String eol = System.lineSeparator();
 
 }

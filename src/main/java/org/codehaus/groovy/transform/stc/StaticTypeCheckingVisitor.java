@@ -357,7 +357,7 @@ public class StaticTypeCheckingVisitor extends ClassCodeVisitorSupport {
     protected static final ClassNode MAP_ENTRY_TYPE = ClassHelper.make(Map.Entry.class);
     protected static final ClassNode ITERABLE_TYPE = ClassHelper.ITERABLE_TYPE;
 
-    private static List<ClassNode> TUPLE_TYPES = Arrays.stream(ClassHelper.TUPLE_CLASSES).map(ClassHelper::makeWithoutCaching).collect(Collectors.toList());
+    private static final List<ClassNode> TUPLE_TYPES = Arrays.stream(ClassHelper.TUPLE_CLASSES).map(ClassHelper::makeWithoutCaching).collect(Collectors.toList());
 
     public static final MethodNode CLOSURE_CALL_NO_ARG  = CLOSURE_TYPE.getDeclaredMethod("call", Parameter.EMPTY_ARRAY);
     public static final MethodNode CLOSURE_CALL_ONE_ARG = CLOSURE_TYPE.getDeclaredMethod("call", new Parameter[]{new Parameter(OBJECT_TYPE, "arg")});
@@ -5844,7 +5844,9 @@ public class StaticTypeCheckingVisitor extends ClassCodeVisitorSupport {
 
     protected boolean typeCheckMethodsWithGenericsOrFail(final ClassNode receiver, final ClassNode[] arguments, final MethodNode candidateMethod, final Expression location) {
         if (!typeCheckMethodsWithGenerics(receiver, arguments, candidateMethod)) {
-            ClassNode r = receiver, at[] = arguments; MethodNode m = candidateMethod;
+            ClassNode r = receiver;
+            ClassNode[] at = arguments;
+            MethodNode m = candidateMethod;
             if (candidateMethod instanceof ExtensionMethodNode) {
                 m = ((ExtensionMethodNode) candidateMethod).getExtensionMethodNode();
                 r = m.getDeclaringClass();

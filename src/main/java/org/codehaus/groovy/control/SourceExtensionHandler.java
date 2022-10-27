@@ -55,11 +55,11 @@ public class SourceExtensionHandler {
                     }
                 } catch (IOException ex) {
                     throw new GroovyRuntimeException("IO Exception attempting to load registered source extension " +
-                            service.toExternalForm() + ". Exception: " + ex.toString());
+                            service.toExternalForm() + ". Exception: " + ex);
                 }
             }
         } catch (IOException ex) {
-            throw new GroovyRuntimeException("IO Exception getting registered source extensions. Exception: " + ex.toString());
+            throw new GroovyRuntimeException("IO Exception getting registered source extensions. Exception: " + ex);
         }
         return extensions;
     }

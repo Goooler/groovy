@@ -628,7 +628,7 @@ public class PluginDefaultGroovyMethods extends DefaultGroovyMethodsSupport {
             // Force the conversion of the GString to string now, or appending
             // is going to be extremely expensive, due to calls to GString#charAt,
             // which is going to re-evaluate the GString for each character!
-            return self.append(value.toString());
+            return self.append(value);
         }
         if (value instanceof CharSequence) {
             return self.append((CharSequence)value);

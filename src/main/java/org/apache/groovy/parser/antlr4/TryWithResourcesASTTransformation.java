@@ -59,7 +59,7 @@ public class TryWithResourcesASTTransformation {
     public TryWithResourcesASTTransformation(final AstBuilder astBuilder) {
         this.astBuilder = astBuilder;
     }
-    private AstBuilder astBuilder;
+    private final AstBuilder astBuilder;
 
     private int resourceCount;
     private String nextResourceName() {

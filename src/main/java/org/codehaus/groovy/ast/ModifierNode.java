@@ -46,11 +46,11 @@ import static org.codehaus.groovy.runtime.DefaultGroovyMethods.asBoolean;
  * Represents a modifier
  */
 public class ModifierNode extends ASTNode {
-    private Integer type;
-    private Integer opcode; // ASM opcode
+    private final Integer type;
+    private final Integer opcode; // ASM opcode
     private String text;
     private AnnotationNode annotationNode;
-    private boolean repeatable;
+    private final boolean repeatable;
 
     public static final int ANNOTATION_TYPE = -999;
     public static final Map<Integer, Integer> MODIFIER_OPCODE_MAP = Maps.of(

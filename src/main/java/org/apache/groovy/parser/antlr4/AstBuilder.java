@@ -1624,9 +1624,7 @@ public class AstBuilder extends GroovyParserBaseVisitor<Object> {
             Optional<FieldNode> fieldNodeOptional =
                     classNode.getFields().stream()
                             .filter(f -> !isTrue(f, IS_RECORD_GENERATED) && !f.isStatic()).findFirst();
-            if (fieldNodeOptional.isPresent()) {
-                createParsingFailedException("Instance field is not allowed in `record`", fieldNodeOptional.get());
-            }
+            fieldNodeOptional.ifPresent(fieldNode -> createParsingFailedException("Instance field is not allowed in `record`", fieldNode));
         }
         classNodeStack.pop();
 

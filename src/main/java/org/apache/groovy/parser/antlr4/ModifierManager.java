@@ -50,8 +50,8 @@ class ModifierManager {
             ConstructorNode.class, Arrays.asList(STATIC, FINAL, ABSTRACT, NATIVE),
             MethodNode.class, Arrays.asList(VOLATILE/*, TRANSIENT*/) // Transient is left open for properties for legacy reasons but should be removed before ClassCompletionVerifier runs (CLASSGEN)
     );
-    private AstBuilder astBuilder;
-    private List<ModifierNode> modifierNodeList;
+    private final AstBuilder astBuilder;
+    private final List<ModifierNode> modifierNodeList;
 
     public ModifierManager(AstBuilder astBuilder, List<ModifierNode> modifierNodeList) {
         this.astBuilder = astBuilder;

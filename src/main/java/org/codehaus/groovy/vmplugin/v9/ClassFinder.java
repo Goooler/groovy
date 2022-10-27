@@ -99,7 +99,7 @@ public class ClassFinder {
                 uri = URI.create("file:/");
                 prefix = path.toString();
             } else {
-                uri = URI.create("jar:" + classpathEntryURI.toString());
+                uri = URI.create("jar:" + classpathEntryURI);
                 prefix = "";
             }
         } else {

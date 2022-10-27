@@ -965,7 +965,7 @@ public class JavaStubGenerator {
         for (Map.Entry<String, Expression> entry : annotation.getMembers().entrySet()) {
             sj.add(entry.getKey() + "=" + getAnnotationValue(entry.getValue()));
         }
-        out.print(sj.toString());
+        out.print(sj);
     }
 
     private String getAnnotationValue(final Object memberValue) {

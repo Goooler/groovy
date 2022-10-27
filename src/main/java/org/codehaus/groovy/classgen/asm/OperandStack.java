@@ -643,7 +643,7 @@ public class OperandStack {
 
     @Override
     public String toString() {
-        return "OperandStack(size=" + stack.size() + ":" + stack.toString() + ")";
+        return "OperandStack(size=" + stack.size() + ":" + stack + ")";
     }
 
     public ClassNode getTopOperand() {

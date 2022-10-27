@@ -402,7 +402,7 @@ public class AnnotationCollectorTransform {
         }
 
         if (!unusedNames.isEmpty()) {
-            String message = "Annotation collector got unmapped names "+unusedNames.toString()+".";
+            String message = "Annotation collector got unmapped names "+ unusedNames +".";
             addError(message, aliasAnnotationUsage, source);
         }
 
