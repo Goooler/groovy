@@ -68,7 +68,7 @@ import static org.codehaus.groovy.ast.tools.GeneralUtils.varX
 @GroovyASTTransformation(phase = CompilePhase.CANONICALIZATION)
 @SuppressWarnings('ParameterCount')
 class ListenerListASTTransformation implements ASTTransformation, Opcodes {
-    private static final Class MY_CLASS = groovy.beans.ListenerList
+    private static final Class MY_CLASS = ListenerList
     private static final ClassNode COLLECTION_TYPE = ClassHelper.make(Collection)
 
     @SuppressWarnings('Instanceof')

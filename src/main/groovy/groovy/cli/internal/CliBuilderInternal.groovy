@@ -232,7 +232,7 @@ class CliBuilderInternal {
         this.errorWriter = writer
     }
 
-    public <T> TypedOption<T> option(Map args, Class<T> type, String description) {
+    def <T> TypedOption<T> option(Map args, Class<T> type, String description) {
         def name = args.opt ?: '_'
         args.type = type
         args.remove('opt')

@@ -36,17 +36,17 @@ class OptionAccessor {
         parseResult.hasMatchedOption(typedOption.longOpt ?: typedOption.opt as String)
     }
 
-    public <T> T defaultValue(String name) {
+    def <T> T defaultValue(String name) {
         Class<T> type = savedTypeOptions[name]?.type
         String value = savedTypeOptions[name]?.defaultValue() ? savedTypeOptions[name].defaultValue() : null
         return (T) value ? getTypedValue(type, name, value) : null
     }
 
-    public <T> T getOptionValue(TypedOption<T> typedOption) {
+    def <T> T getOptionValue(TypedOption<T> typedOption) {
         getOptionValue(typedOption, null)
     }
 
-    public <T> T getOptionValue(TypedOption<T> typedOption, T defaultValue) {
+    def <T> T getOptionValue(TypedOption<T> typedOption, T defaultValue) {
         String optionName = (String) typedOption.longOpt ?: typedOption.opt
         if (parseResult.hasMatchedOption(optionName)) {
             return parseResult.matchedOptionValue(optionName, defaultValue)
@@ -56,11 +56,11 @@ class OptionAccessor {
         }
     }
 
-    public <T> T getAt(TypedOption<T> typedOption) {
+    def <T> T getAt(TypedOption<T> typedOption) {
         getAt(typedOption, null)
     }
 
-    public <T> T getAt(TypedOption<T> typedOption, T defaultValue) {
+    def <T> T getAt(TypedOption<T> typedOption, T defaultValue) {
         getOptionValue(typedOption, defaultValue)
     }
 

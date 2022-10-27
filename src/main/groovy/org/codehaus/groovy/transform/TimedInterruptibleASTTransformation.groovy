@@ -86,7 +86,7 @@ class TimedInterruptibleASTTransformation extends AbstractASTTransformation {
         init(nodes, source)
         AnnotationNode node = (AnnotationNode) nodes[0]
         AnnotatedNode annotatedNode = (AnnotatedNode) nodes[1]
-        if (!MY_TYPE.equals(node.classNode)) {
+        if (MY_TYPE != node.classNode) {
             internalError("Transformation called from wrong annotation: $node.classNode.name")
         }
 
