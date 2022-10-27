@@ -187,7 +187,7 @@ public class StaticCompilationVisitor extends StaticTypeCheckingVisitor {
 
         classNode.getInnerClasses().forEachRemaining(innerClassNode -> {
             boolean innerStaticCompile = !(skip || isSkippedInnerClass(innerClassNode));
-            innerClassNode.putNodeMetaData(STATIC_COMPILE_NODE, Boolean.valueOf(innerStaticCompile));
+            innerClassNode.putNodeMetaData(STATIC_COMPILE_NODE, innerStaticCompile);
             innerClassNode.putNodeMetaData(WriterControllerFactory.class, node.getNodeMetaData(WriterControllerFactory.class));
             if (innerStaticCompile && !anyMethodSkip(innerClassNode)) {
                 innerClassNode.putNodeMetaData(MopWriter.Factory.class, StaticCompilationMopWriter.FACTORY);

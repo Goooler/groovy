@@ -220,7 +220,7 @@ public class AnnotationNode extends ASTNode {
                 Expression value = next.getValue();
                 String text;
                 if (value instanceof ListExpression) {
-                    List result = ((ListExpression) value).getExpressions().stream().map(exp -> { return exp instanceof AnnotationConstantExpression ? ((ASTNode)((AnnotationConstantExpression)exp).getValue()).getText() : exp.getText(); }).collect(Collectors.toList());
+                    List result = ((ListExpression) value).getExpressions().stream().map(exp -> exp instanceof AnnotationConstantExpression ? ((ASTNode)((AnnotationConstantExpression)exp).getValue()).getText() : exp.getText()).collect(Collectors.toList());
                     text = result.toString();
                 } else {
                     text = value.getText();

@@ -39,6 +39,7 @@ import org.codehaus.groovy.ast.expr.VariableExpression;
 import org.codehaus.groovy.ast.stmt.AssertStatement;
 import org.codehaus.groovy.ast.stmt.BlockStatement;
 import org.codehaus.groovy.ast.stmt.ForStatement;
+import org.codehaus.groovy.ast.tools.GeneralUtils;
 import org.codehaus.groovy.ast.tools.GenericsUtils;
 import org.codehaus.groovy.control.CompilePhase;
 import org.codehaus.groovy.control.SourceUnit;
@@ -242,7 +243,7 @@ public class NamedVariantASTTransformation extends AbstractASTTransformation {
             mapParam.addAnnotation(namedParam);
         }
 
-        Expression[] subMapArgs = names.stream().map(name -> constX(name)).toArray(Expression[]::new);
+        Expression[] subMapArgs = names.stream().map(GeneralUtils::constX).toArray(Expression[]::new);
         Expression delegateMap = callX(varX(mapParam), "subMap", args(subMapArgs));
         args.addExpression(castX(fromParam.getType(), delegateMap));
         return true;

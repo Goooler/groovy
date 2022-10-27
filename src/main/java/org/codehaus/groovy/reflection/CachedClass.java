@@ -48,7 +48,7 @@ public class CachedClass {
 
     private static final ReferenceBundle softBundle = ReferenceBundle.getSoftBundle();
 
-    private final LazyReference<CachedField[]> fields = new LazyReference<CachedField[]>(softBundle) {
+    private final LazyReference<CachedField[]> fields = new LazyReference<>(softBundle) {
         private static final long serialVersionUID = 5450437842165410025L;
 
         @Override
@@ -60,7 +60,7 @@ public class CachedClass {
         }
     };
 
-    private final LazyReference<CachedConstructor[]> constructors = new LazyReference<CachedConstructor[]>(softBundle) {
+    private final LazyReference<CachedConstructor[]> constructors = new LazyReference<>(softBundle) {
         private static final long serialVersionUID = -5834446523983631635L;
 
         @Override
@@ -74,7 +74,7 @@ public class CachedClass {
         }
     };
 
-    private final LazyReference<CachedMethod[]> methods = new LazyReference<CachedMethod[]>(softBundle) {
+    private final LazyReference<CachedMethod[]> methods = new LazyReference<>(softBundle) {
         private static final long serialVersionUID = 6347586066597418308L;
 
         @Override
@@ -118,7 +118,7 @@ public class CachedClass {
         }
     };
 
-    private final LazyReference<CachedClass> cachedSuperClass = new LazyReference<CachedClass>(softBundle) {
+    private final LazyReference<CachedClass> cachedSuperClass = new LazyReference<>(softBundle) {
         private static final long serialVersionUID = -4663740963306806058L;
 
         @Override
@@ -138,7 +138,7 @@ public class CachedClass {
         return java.security.AccessController.doPrivileged(action);
     }
 
-    private final LazyReference<CallSiteClassLoader> callSiteClassLoader = new LazyReference<CallSiteClassLoader>(softBundle) {
+    private final LazyReference<CallSiteClassLoader> callSiteClassLoader = new LazyReference<>(softBundle) {
         private static final long serialVersionUID = 4410385968428074090L;
 
         @Override
@@ -147,7 +147,7 @@ public class CachedClass {
         }
     };
 
-    private final LazyReference<Collection<ClassInfo>> hierarchy = new LazyReference<Collection<ClassInfo>>(softBundle) {
+    private final LazyReference<Collection<ClassInfo>> hierarchy = new LazyReference<>(softBundle) {
         private static final long serialVersionUID = 7166687623678851596L;
 
         @Override
@@ -169,7 +169,7 @@ public class CachedClass {
         }
     };
 
-    private final LazyReference<Set<CachedClass>> declaredInterfaces = new LazyReference<Set<CachedClass>>(softBundle) {
+    private final LazyReference<Set<CachedClass>> declaredInterfaces = new LazyReference<>(softBundle) {
         private static final long serialVersionUID = 2139190436931329873L;
 
         @Override
@@ -184,7 +184,7 @@ public class CachedClass {
         }
     };
 
-    private final LazyReference<Set<CachedClass>> interfaces = new LazyReference<Set<CachedClass>>(softBundle) {
+    private final LazyReference<Set<CachedClass>> interfaces = new LazyReference<>(softBundle) {
         private static final long serialVersionUID = 4060471819464086940L;
 
         @Override

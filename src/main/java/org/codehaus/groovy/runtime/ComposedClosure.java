@@ -92,7 +92,7 @@ public final class ComposedClosure<V> extends Closure<V> {
 
     @Override
     public Object clone() {
-        return new ComposedClosure<V>(first, second);
+        return new ComposedClosure<>(first, second);
     }
 
     @Override

@@ -395,13 +395,14 @@ public class StreamGroovyMethods {
      * @since 3.0.0
      */
     public static <T> Stream<T> stream(final Enumeration<T> self) {
-        return stream(new Spliterators.AbstractSpliterator<T>(Long.MAX_VALUE, Spliterator.ORDERED) {
+        return stream(new Spliterators.AbstractSpliterator<>(Long.MAX_VALUE, Spliterator.ORDERED) {
             @Override
             public void forEachRemaining(final Consumer<? super T> action) {
                 while (self.hasMoreElements()) {
                     action.accept(self.nextElement());
                 }
             }
+
             @Override
             public boolean tryAdvance(final Consumer<? super T> action) {
                 if (self.hasMoreElements()) {

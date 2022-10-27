@@ -63,10 +63,7 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.HashSet;
+import java.util.*;
 
 import static org.codehaus.groovy.vmplugin.v8.IndyGuardsFiltersAndSignatures.ARRAYLIST_CONSTRUCTOR;
 import static org.codehaus.groovy.vmplugin.v8.IndyGuardsFiltersAndSignatures.BEAN_CONSTRUCTOR_PROPERTY_SETTER;
@@ -932,7 +929,7 @@ public abstract class Selector {
 
             // guards for receiver and parameter
             Class<?>[] pt = handle.type().parameterArray();
-            if (Arrays.stream(args).anyMatch(arg -> null == arg)) {
+            if (Arrays.stream(args).anyMatch(Objects::isNull)) {
                 for (int i = 0; i < args.length; i++) {
                     Object arg = args[i];
                     Class<?> paramType = pt[i];

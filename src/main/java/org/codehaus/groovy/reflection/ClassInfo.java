@@ -87,9 +87,9 @@ public class ClassInfo implements Finalizable {
     private static final ReferenceBundle weakBundle = ReferenceBundle.getWeakBundle();
 
     private static final ManagedConcurrentLinkedQueue<ClassInfo> modifiedExpandos =
-            new ManagedConcurrentLinkedQueue<ClassInfo>(weakBundle);
+        new ManagedConcurrentLinkedQueue<>(weakBundle);
 
-    private static final GroovyClassValue<ClassInfo> globalClassValue = GroovyClassValueFactory.createGroovyClassValue(new ComputeValue<ClassInfo>(){
+    private static final GroovyClassValue<ClassInfo> globalClassValue = GroovyClassValueFactory.createGroovyClassValue(new ComputeValue<>() {
         @Override
         public ClassInfo computeValue(Class<?> type) {
             ClassInfo ret = new ClassInfo(type);
@@ -229,7 +229,7 @@ public class ClassInfo implements Finalizable {
         strongMetaClass = null;
         ManagedReference<MetaClass> newRef = null;
         if (answer != null) {
-            newRef = new ManagedReference<MetaClass> (softBundle,answer);
+            newRef = new ManagedReference<>(softBundle, answer);
         }
         replaceWeakMetaClassRef(newRef);
     }
@@ -463,7 +463,7 @@ public class ClassInfo implements Finalizable {
 
     private static class GlobalClassSet {
 
-        private final ManagedConcurrentLinkedQueue<ClassInfo> items = new ManagedConcurrentLinkedQueue<ClassInfo>(weakBundle);
+        private final ManagedConcurrentLinkedQueue<ClassInfo> items = new ManagedConcurrentLinkedQueue<>(weakBundle);
 
         public int size(){
             return values().size();

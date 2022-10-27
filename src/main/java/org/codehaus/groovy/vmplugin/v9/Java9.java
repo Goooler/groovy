@@ -131,7 +131,7 @@ public class Java9 extends Java8 {
                         Collectors.toMap(
                                 Map.Entry::getKey,
                                 entry -> entry.getValue().stream()
-                                        .filter(e -> defaultPackageNames.contains(e))
+                                        .filter(defaultPackageNames::contains)
                                         .map(e -> e.replace('/', '.') + ".")
                                         .collect(Collectors.toSet())
                         )

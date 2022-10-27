@@ -1133,7 +1133,7 @@ public class StringGroovyMethods extends DefaultGroovyMethodsSupport {
                 list.add((String) iter.next());
             }
         }
-        return new ArrayList<String>(list);
+        return new ArrayList<>(list);
     }
 
     /**
@@ -1524,7 +1524,7 @@ public class StringGroovyMethods extends DefaultGroovyMethodsSupport {
         }
 
         int count = matcher.groupCount();
-        List<String> groups = new ArrayList<String>();
+        List<String> groups = new ArrayList<>();
         for (int i = 0; i <= count; i++) {
             groups.add(matcher.group(i));
         }
@@ -1794,7 +1794,7 @@ public class StringGroovyMethods extends DefaultGroovyMethodsSupport {
                 if (hasGroup(self)) {
                     // are we using groups?
                     // yes, so return the specified group as list
-                    List<String> list = new ArrayList<String>(self.groupCount());
+                    List<String> list = new ArrayList<>(self.groupCount());
                     for (int i = 0; i <= self.groupCount(); i += 1) {
                         list.add(self.group(i));
                     }
@@ -2391,7 +2391,7 @@ public class StringGroovyMethods extends DefaultGroovyMethodsSupport {
         final String s = self.toString();
         final Matcher matcher = pattern.matcher(s);
         if (matcher.find()) {
-            final StringBuffer sb = new StringBuffer(s.length() + 16);
+            final StringBuilder sb = new StringBuilder(s.length() + 16);
             do {
                 String replacement = getReplacement(matcher, closure);
                 matcher.appendReplacement(sb, Matcher.quoteReplacement(replacement));
@@ -2490,7 +2490,7 @@ public class StringGroovyMethods extends DefaultGroovyMethodsSupport {
         final String s = self.toString();
         final Matcher matcher = pattern.matcher(s);
         if (matcher.find()) {
-            final StringBuffer sb = new StringBuffer(s.length() + 16);
+            final StringBuilder sb = new StringBuilder(s.length() + 16);
             String replacement = getReplacement(matcher, closure);
             matcher.appendReplacement(sb, Matcher.quoteReplacement(replacement));
             matcher.appendTail(sb);
@@ -3249,7 +3249,7 @@ public class StringGroovyMethods extends DefaultGroovyMethodsSupport {
      * @since 1.8.2
      */
     public static Set<String> toSet(final CharSequence self) {
-        return new HashSet<String>(toList(self));
+        return new HashSet<>(toList(self));
     }
 
     /**

@@ -142,7 +142,7 @@ public class ClassCompletionVerifier extends ClassCodeVisitorSupport {
         if (parent != null) {
             result = parent.getDeclaredMethodsMap();
         } else {
-            result = new HashMap<String, MethodNode>();
+            result = new HashMap<>();
         }
         // add in unimplemented abstract methods from the interfaces
         ClassNodeUtils.addDeclaredMethodsFromInterfaces(node, result);
@@ -236,7 +236,7 @@ public class ClassCompletionVerifier extends ClassCodeVisitorSupport {
         if (node.isInterface()) return;
         for (ClassNode anInterface : GeneralUtils.getInterfacesAndSuperInterfaces(node)) {
             if (Traits.isTrait(anInterface)) {
-                LinkedHashSet<ClassNode> selfTypes = new LinkedHashSet<ClassNode>();
+                LinkedHashSet<ClassNode> selfTypes = new LinkedHashSet<>();
                 for (ClassNode type : Traits.collectSelfTypes(anInterface, selfTypes, true, false)) {
                     if (type.isInterface() && !node.implementsInterface(type)) {
                         addError(getDescription(node)

@@ -50,7 +50,7 @@ public class InnerClassNode extends ClassNode {
         this.outerClass = outerClass;
 
         if (outerClass.innerClasses == null)
-            outerClass.innerClasses = new LinkedList<InnerClassNode> ();
+            outerClass.innerClasses = new LinkedList<>();
         outerClass.innerClasses.add(this);
     }
 

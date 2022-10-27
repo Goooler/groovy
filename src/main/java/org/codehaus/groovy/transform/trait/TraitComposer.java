@@ -261,7 +261,7 @@ public abstract class TraitComposer {
                                     if (isStatic == 0) {
                                         cNode.addObjectInitializerStatements(stmt);
                                     } else {
-                                        List<Statement> staticStatements = new ArrayList<Statement>();
+                                        List<Statement> staticStatements = new ArrayList<>();
                                         staticStatements.add(stmt);
                                         cNode.addStaticInitializerStatements(staticStatements, true);
                                     }
@@ -430,7 +430,7 @@ public abstract class TraitComposer {
 
     private static GenericsType[] removeNonPlaceHolders(GenericsType[] oldTypes) {
         if (oldTypes==null || oldTypes.length==0) return oldTypes;
-        ArrayList<GenericsType> l = new ArrayList<GenericsType>(Arrays.asList(oldTypes));
+        ArrayList<GenericsType> l = new ArrayList<>(Arrays.asList(oldTypes));
         Iterator<GenericsType> it = l.iterator();
         boolean modified = false;
         while (it.hasNext()) {
@@ -451,11 +451,11 @@ public abstract class TraitComposer {
      * @param genericsSpec
      */
     private static void createSuperForwarder(ClassNode targetNode, MethodNode forwarder, final Map<String,ClassNode> genericsSpec) {
-        List<ClassNode> interfaces = new ArrayList<ClassNode>(Traits.collectAllInterfacesReverseOrder(targetNode, new LinkedHashSet<ClassNode>()));
+        List<ClassNode> interfaces = new ArrayList<>(Traits.collectAllInterfacesReverseOrder(targetNode, new LinkedHashSet<>()));
         String name = forwarder.getName();
         Parameter[] forwarderParameters = forwarder.getParameters();
-        LinkedHashSet<ClassNode> traits = new LinkedHashSet<ClassNode>();
-        List<MethodNode> superForwarders = new LinkedList<MethodNode>();
+        LinkedHashSet<ClassNode> traits = new LinkedHashSet<>();
+        List<MethodNode> superForwarders = new LinkedList<>();
         for (ClassNode node : interfaces) {
             if (Traits.isTrait(node)) {
                 MethodNode method = node.getDeclaredMethod(name, forwarderParameters);
@@ -507,7 +507,7 @@ public abstract class TraitComposer {
     }
 
     private static Statement createSuperFallback(final MethodNode forwarderMethod, final ClassNode returnType) {
-        ArgumentListExpression paramTuple = args(Arrays.stream(forwarderMethod.getParameters()).map(p -> varX(p)).toArray(Expression[]::new));
+        ArgumentListExpression paramTuple = args(Arrays.stream(forwarderMethod.getParameters()).map(GeneralUtils::varX).toArray(Expression[]::new));
 
         MethodCallExpression proxyTarget = callX(castX(Traits.GENERATED_PROXY_CLASSNODE, varX("this")), "getProxyTarget");
         proxyTarget.setImplicitThis(false);

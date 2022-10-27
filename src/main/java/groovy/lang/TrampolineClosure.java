@@ -96,7 +96,7 @@ final class TrampolineClosure<V> extends Closure<V> {
      */
     @Override
    public Closure<V> trampoline(final Object... args) {
-        return new TrampolineClosure<V>(original.curry(args));
+        return new TrampolineClosure<>(original.curry(args));
     }
 
     /**

@@ -217,7 +217,7 @@ public class ImmutablePropertyUtils {
     public static List<String> getKnownImmutables(final AbstractASTTransformation xform, final ClassNode cNode) {
         List<AnnotationNode> annotations = cNode.getAnnotations(ImmutablePropertyUtils.IMMUTABLE_OPTIONS_TYPE);
         AnnotationNode anno = annotations.isEmpty() ? null : annotations.get(0);
-        final List<String> immutables = new ArrayList<String>();
+        final List<String> immutables = new ArrayList<>();
         if (anno == null) return immutables;
 
         final Expression expression = anno.getMember(MEMBER_KNOWN_IMMUTABLES);
@@ -242,7 +242,7 @@ public class ImmutablePropertyUtils {
     public static List<String> getKnownImmutableClasses(final AbstractASTTransformation xform, final ClassNode cNode) {
         List<AnnotationNode> annotations = cNode.getAnnotations(ImmutablePropertyUtils.IMMUTABLE_OPTIONS_TYPE);
         AnnotationNode anno = annotations.isEmpty() ? null : annotations.get(0);
-        final List<String> immutableClasses = new ArrayList<String>();
+        final List<String> immutableClasses = new ArrayList<>();
 
         if (anno == null) return immutableClasses;
         final Expression expression = anno.getMember(MEMBER_KNOWN_IMMUTABLE_CLASSES);

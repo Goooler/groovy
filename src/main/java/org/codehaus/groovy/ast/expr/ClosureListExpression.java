@@ -45,7 +45,7 @@ public class ClosureListExpression extends ListExpression {
     }
 
     public ClosureListExpression() {
-        this(new ArrayList<Expression>(3));
+        this(new ArrayList<>(3));
     }
 
     @Override

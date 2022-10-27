@@ -1180,7 +1180,7 @@ public class AstBuilder extends GroovyParserBaseVisitor<Object> {
             }
 
             List<Statement> statementList =
-                    statementInfoList.stream().map(e -> e.getV1())
+                    statementInfoList.stream().map(Tuple3::getV1)
                             .reduce(new LinkedList<>(), (r, e) -> {
                                 r.addAll(e);
                                 return r;

@@ -337,8 +337,8 @@ public class DelegateASTTransformation extends AbstractASTTransformation {
             if (cNode.getGetterMethod(getterName) != null && cNode.getGetterMethod(isserName) == null)
                 willHaveIsAccessor = false;
         }
-        Reference<Boolean> ownerWillHaveGetAccessor = new Reference<Boolean>();
-        Reference<Boolean> ownerWillHaveIsAccessor = new Reference<Boolean>();
+        Reference<Boolean> ownerWillHaveGetAccessor = new Reference<>();
+        Reference<Boolean> ownerWillHaveIsAccessor = new Reference<>();
         extractAccessorInfo(delegate.owner, name, ownerWillHaveGetAccessor, ownerWillHaveIsAccessor);
 
         if (willHaveGetAccessor && !ownerWillHaveGetAccessor.get()

@@ -1161,7 +1161,7 @@ public class MetaClassImpl implements MetaClass, MutableMetaClass {
         }
     }
 
-    private static final ClassValue<Map<String, Set<Method>>> SPECIAL_METHODS_MAP = new ClassValue<Map<String, Set<Method>>>() {
+    private static final ClassValue<Map<String, Set<Method>>> SPECIAL_METHODS_MAP = new ClassValue<>() {
         @Override
         protected Map<String, Set<Method>> computeValue(final Class<?> type) {
             return new ConcurrentHashMap<>(4);
@@ -2527,7 +2527,7 @@ public class MetaClassImpl implements MetaClass, MutableMetaClass {
         MetaBeanProperty mbp = (MetaBeanProperty) mp;
         final MetaMethod getterMethod = mbp.getGetter();
         final MetaMethod setterMethod = mbp.getSetter();
-        final CachedField staticField = Optional.ofNullable(mbp.getField()).filter(f -> f.isStatic()).orElse(null);
+        final CachedField staticField = Optional.ofNullable(mbp.getField()).filter(CachedField::isStatic).orElse(null);
 
         boolean getter = getterMethod == null || getterMethod.isStatic();
         boolean setter = setterMethod == null || setterMethod.isStatic();

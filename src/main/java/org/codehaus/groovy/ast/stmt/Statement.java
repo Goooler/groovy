@@ -53,9 +53,7 @@ public class Statement extends ASTNode {
     }
 
     public void copyStatementLabels(final Statement that) {
-        Optional.ofNullable(that.getStatementLabels()).ifPresent(labels -> {
-            labels.forEach(this::addStatementLabel);
-        });
+        Optional.ofNullable(that.getStatementLabels()).ifPresent(labels -> labels.forEach(this::addStatementLabel));
     }
 
     public boolean isEmpty() {

@@ -145,12 +145,12 @@ public class MapConstructorASTTransformation extends AbstractASTTransformation i
         // HACK: JavaStubGenerator could have snuck in a constructor we don't want
         cNode.getDeclaredConstructors().removeIf(next -> next.getFirstStatement() == null);
 
-        Set<String> names = new HashSet<String>();
+        Set<String> names = new HashSet<>();
         List<PropertyNode> superList;
         if (includeSuperProperties || includeSuperFields) {
             superList = getAllProperties(names, cNode, cNode.getSuperClass(), includeSuperProperties, includeSuperFields, false, allProperties, true, false, false, allNames, includeStatic);
         } else {
-            superList = new ArrayList<PropertyNode>();
+            superList = new ArrayList<>();
         }
         List<PropertyNode> list = getAllProperties(names, cNode, cNode, includeProperties, includeFields, false, allProperties, false, false, false, allNames, includeStatic);
 

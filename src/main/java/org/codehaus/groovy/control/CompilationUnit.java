@@ -244,9 +244,7 @@ public class CompilationUnit extends ProcessingUnit {
             xformer.transformClass(classNode);
         }, Phases.SEMANTIC_ANALYSIS);
 
-        addPhaseOperation((final SourceUnit source, final GeneratorContext context, final ClassNode classNode) -> {
-            TraitComposer.doExtendTraits(classNode, source, this);
-        }, Phases.CANONICALIZATION);
+        addPhaseOperation((final SourceUnit source, final GeneratorContext context, final ClassNode classNode) -> TraitComposer.doExtendTraits(classNode, source, this), Phases.CANONICALIZATION);
 
         addPhaseOperation(source -> {
             List<ClassNode> classes = source.getAST().getClasses();
@@ -558,17 +556,20 @@ public class CompilationUnit extends ProcessingUnit {
      * Returns an iterator on the unit's SourceUnits.
      */
     public Iterator<SourceUnit> iterator() {
-        return new Iterator<SourceUnit>() {
+        return new Iterator<>() {
             private final Iterator<String> nameIterator = sources.keySet().iterator();
+
             @Override
             public boolean hasNext() {
                 return nameIterator.hasNext();
             }
+
             @Override
             public SourceUnit next() {
                 String name = nameIterator.next();
                 return sources.get(name);
             }
+
             @Override
             public void remove() {
                 throw new UnsupportedOperationException();

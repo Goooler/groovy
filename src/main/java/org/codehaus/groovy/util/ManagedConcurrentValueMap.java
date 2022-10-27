@@ -34,7 +34,7 @@ public class ManagedConcurrentValueMap<K,V> {
     private ReferenceBundle bundle;
     public ManagedConcurrentValueMap(ReferenceBundle bundle){
         this.bundle = bundle;
-        internalMap = new ConcurrentHashMap<K, ManagedReference<V>>();
+        internalMap = new ConcurrentHashMap<>();
     }
 
     /**
@@ -63,7 +63,7 @@ public class ManagedConcurrentValueMap<K,V> {
      * @param value the new value
      */
     public void put(final K key, V value) {
-        ManagedReference<V> ref = new ManagedReference<V>(bundle, value) {
+        ManagedReference<V> ref = new ManagedReference<>(bundle, value) {
             @Override
             public void finalizeReference() {
                 internalMap.remove(key, this);

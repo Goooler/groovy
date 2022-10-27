@@ -145,7 +145,7 @@ public class PluginDefaultGroovyMethods extends DefaultGroovyMethodsSupport {
     public static <S,T> Future<T> collect(final Future<S> self, @ClosureParams(FirstParam.FirstGenericType.class) final Closure<T> transform) {
         Objects.requireNonNull(self);
         Objects.requireNonNull(transform);
-        return new TransformedFuture<T>(self, transform);
+        return new TransformedFuture<>(self, transform);
     }
 
     private static class TransformedFuture<E> implements Future<E> {

@@ -327,7 +327,7 @@ public class GroovyCategorySupport {
 
     private static class MyThreadLocal extends ThreadLocal<SoftReference> {
 
-        final ConcurrentHashMap<String,AtomicInteger> usage = new ConcurrentHashMap<String,AtomicInteger> ();
+        final ConcurrentHashMap<String,AtomicInteger> usage = new ConcurrentHashMap<>();
 
         public ThreadCategoryInfo getInfo() {
             final SoftReference reference = get();

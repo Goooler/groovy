@@ -34,7 +34,7 @@ public abstract class Expression extends AnnotatedNode {
     private ClassNode type = ClassHelper.dynamicType();
 
     /**
-     * Return a copy of the expression calling the transformer on any nested expressions 
+     * Return a copy of the expression calling the transformer on any nested expressions
      * @param transformer
      */
     public abstract Expression transformExpression(ExpressionTransformer transformer);
@@ -44,7 +44,7 @@ public abstract class Expression extends AnnotatedNode {
      * @return a new list of transformed expressions
      */
     protected List<Expression> transformExpressions(List<? extends Expression> expressions, ExpressionTransformer transformer) {
-        List<Expression> list = new ArrayList<Expression>(expressions.size());
+        List<Expression> list = new ArrayList<>(expressions.size());
         for (Expression expr : expressions ) {
             list.add(transformer.transform(expr));
         }
@@ -58,7 +58,7 @@ public abstract class Expression extends AnnotatedNode {
      */
     protected <T extends Expression> List<T> transformExpressions(List<? extends Expression> expressions,
             ExpressionTransformer transformer, Class<T> transformedType) {
-        List<T> list = new ArrayList<T>(expressions.size());
+        List<T> list = new ArrayList<>(expressions.size());
         for (Expression expr : expressions) {
             Expression transformed = transformer.transform(expr);
             if (!transformedType.isInstance(transformed))

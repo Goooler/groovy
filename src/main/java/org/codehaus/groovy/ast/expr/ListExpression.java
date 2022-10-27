@@ -32,7 +32,7 @@ public class ListExpression extends Expression {
     private boolean wrapped = false;
 
     public ListExpression() {
-        this(new ArrayList<Expression>());
+        this(new ArrayList<>());
     }
 
     public ListExpression(List<Expression> expressions) {

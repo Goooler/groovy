@@ -120,7 +120,7 @@ public class ClassFinder {
         Tuple2<FileSystem, Boolean> fsMaybeNew = null;
         try {
             fsMaybeNew = maybeNewFileSystem(uri);
-            Files.walkFileTree(fsMaybeNew.getV1().getPath(prefix + "/" + packageName), new SimpleFileVisitor<Path>() {
+            Files.walkFileTree(fsMaybeNew.getV1().getPath(prefix + "/" + packageName), new SimpleFileVisitor<>() {
                 @Override
                 public FileVisitResult preVisitDirectory(Path path, BasicFileAttributes attrs) {
                     return FileVisitResult.CONTINUE;

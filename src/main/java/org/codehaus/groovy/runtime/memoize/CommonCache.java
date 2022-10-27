@@ -53,7 +53,7 @@ public class CommonCache<K, V> implements EvictableCache<K, V>, ValueConvertable
      * Constructs a cache with unlimited size
      */
     public CommonCache() {
-        this(new LinkedHashMap<K, V>());
+        this(new LinkedHashMap<>());
     }
 
     /**
@@ -64,7 +64,7 @@ public class CommonCache<K, V> implements EvictableCache<K, V>, ValueConvertable
      * @param evictionStrategy LRU or FIFO, see {@link org.codehaus.groovy.runtime.memoize.EvictableCache.EvictionStrategy}
      */
     public CommonCache(final int initialCapacity, final int maxSize, final EvictionStrategy evictionStrategy) {
-        this(new LinkedHashMap<K, V>(initialCapacity, DEFAULT_LOAD_FACTOR, EvictionStrategy.LRU == evictionStrategy) {
+        this(new LinkedHashMap<>(initialCapacity, DEFAULT_LOAD_FACTOR, EvictionStrategy.LRU == evictionStrategy) {
             private static final long serialVersionUID = -8012450791479726621L;
 
             @Override
@@ -212,7 +212,7 @@ public class CommonCache<K, V> implements EvictableCache<K, V>, ValueConvertable
      */
     @Override
     public Map<K, V> clearAll() {
-        Map<K, V> result = new LinkedHashMap<K, V>(map);
+        Map<K, V> result = new LinkedHashMap<>(map);
         map.clear();
         return result;
     }

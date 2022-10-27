@@ -94,13 +94,13 @@ public class GroovyClassLoader extends URLClassLoader {
     /**
      * this cache contains the loaded classes or PARSING, if the class is currently parsed
      */
-    protected final EvictableCache<String, Class> classCache = new UnlimitedConcurrentCache<String, Class>();
+    protected final EvictableCache<String, Class> classCache = new UnlimitedConcurrentCache<>();
 
     /**
      * This cache contains mappings of file name to class. It is used
      * to bypass compilation.
      */
-    protected final StampedCommonCache<String, Class> sourceCache = new StampedCommonCache<String, Class>();
+    protected final StampedCommonCache<String, Class> sourceCache = new StampedCommonCache<>();
 
     private final CompilerConfiguration config;
     private String sourceEncoding;
@@ -449,7 +449,7 @@ public class GroovyClassLoader extends URLClassLoader {
 
     @SuppressWarnings("removal") // TODO a future Groovy version should perform the operation not as a privileged action
     private ProtectionDomain getProtectionDomain() {
-        return java.security.AccessController.doPrivileged(new PrivilegedAction<ProtectionDomain>() {
+        return java.security.AccessController.doPrivileged(new PrivilegedAction<>() {
             @Override
             public ProtectionDomain run() {
                 return getClass().getProtectionDomain();
@@ -673,7 +673,7 @@ public class GroovyClassLoader extends URLClassLoader {
         protected ClassCollector(InnerLoader cl, CompilationUnit unit, SourceUnit su) {
             this.cl = cl;
             this.unit = unit;
-            this.loadedClasses = new ArrayList<Class>();
+            this.loadedClasses = new ArrayList<>();
             this.su = su;
         }
 

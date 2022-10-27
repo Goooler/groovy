@@ -61,6 +61,7 @@ import java.lang.annotation.Annotation;
 import java.lang.annotation.ElementType;
 import java.lang.invoke.SerializedLambda;
 import java.lang.ref.SoftReference;
+import java.lang.reflect.Method;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Arrays;
@@ -201,7 +202,7 @@ public class ClassHelper {
         final SoftReference<ClassNode> classNodeSoftReference = ClassHelperCache.classCache.get(c);
         if (classNodeSoftReference == null || (classNode = classNodeSoftReference.get()) == null) {
             classNode = new ClassNode(c);
-            ClassHelperCache.classCache.put(c, new SoftReference<ClassNode>(classNode));
+            ClassHelperCache.classCache.put(c, new SoftReference<>(classNode));
             VMPluginFactory.getPlugin().setAdditionalClassInformation(classNode);
         }
         return classNode;
@@ -639,5 +640,5 @@ public class ClassHelper {
     }
 
     private static final Set<String> OBJECT_METHOD_NAME_SET =
-            Collections.unmodifiableSet(Arrays.stream(Object.class.getMethods()).map(m -> m.getName()).collect(Collectors.toSet()));
+            Collections.unmodifiableSet(Arrays.stream(Object.class.getMethods()).map(Method::getName).collect(Collectors.toSet()));
 }

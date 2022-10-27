@@ -31,7 +31,7 @@ public class MapExpression extends Expression {
     private final List<MapEntryExpression> mapEntryExpressions;
 
     public MapExpression() {
-        this(new ArrayList<MapEntryExpression>());
+        this(new ArrayList<>());
     }
 
     public MapExpression(List<MapEntryExpression> mapEntryExpressions) {

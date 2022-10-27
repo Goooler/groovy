@@ -42,7 +42,7 @@ public class HashCodeHelper {
     }
 
     public static int updateHash(int current, Character var) {
-        return updateHash(current, var == null ? 0 : var.charValue());
+        return updateHash(current, var == null ? 0 : var);
     }
 
     public static int updateHash(int current, int var) {

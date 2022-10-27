@@ -39,7 +39,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * @since 1.5
  */
 public class ThreadManagedMetaBeanProperty extends MetaBeanProperty {
-    private static final ConcurrentHashMap<String,ManagedIdentityConcurrentMap> PROPNAME_TO_MAP = new ConcurrentHashMap<String, ManagedIdentityConcurrentMap>();
+    private static final ConcurrentHashMap<String,ManagedIdentityConcurrentMap> PROPNAME_TO_MAP = new ConcurrentHashMap<>();
 
     private final ManagedIdentityConcurrentMap instance2Prop;
 

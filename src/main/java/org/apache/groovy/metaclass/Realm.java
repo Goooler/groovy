@@ -37,7 +37,7 @@ public final class Realm {
 
     private final String name;
     private final Realm parent;
-    private final ClassValue<MetaClassConstant<?>> cv = new ClassValue<MetaClassConstant<?>>() {
+    private final ClassValue<MetaClassConstant<?>> cv = new ClassValue<>() {
         @Override
         @SuppressWarnings("unchecked")
         protected MetaClassConstant<?> computeValue(Class<?> type) {

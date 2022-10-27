@@ -42,7 +42,7 @@ public class CacheableCallSite extends MutableCallSite {
     private MethodHandle defaultTarget;
     private MethodHandle fallbackTarget;
     private final Map<String, MethodHandleWrapper> lruCache =
-            new LinkedHashMap<String, MethodHandleWrapper>(INITIAL_CAPACITY, LOAD_FACTOR, true) {
+            new LinkedHashMap<>(INITIAL_CAPACITY, LOAD_FACTOR, true) {
                 private static final long serialVersionUID = 7785958879964294463L;
 
                 @Override

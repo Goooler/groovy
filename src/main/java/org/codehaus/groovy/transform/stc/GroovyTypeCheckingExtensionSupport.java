@@ -373,7 +373,7 @@ public class GroovyTypeCheckingExtensionSupport extends AbstractTypeCheckingExte
     @SuppressWarnings("unchecked")
     public List<MethodNode> handleMissingMethod(final ClassNode receiver, final String name, final ArgumentListExpression argumentList, final ClassNode[] argumentTypes, final MethodCall call) {
         List<Closure> onMethodSelection = eventHandlers.get("handleMissingMethod");
-        List<MethodNode> methodList = new LinkedList<MethodNode>();
+        List<MethodNode> methodList = new LinkedList<>();
         if (onMethodSelection != null) {
             for (Closure closure : onMethodSelection) {
                 Object result = safeCall(closure, receiver, name, argumentList, argumentTypes, call);
@@ -405,7 +405,7 @@ public class GroovyTypeCheckingExtensionSupport extends AbstractTypeCheckingExte
                     if (result instanceof MethodNode) {
                         methodList = Collections.singletonList((MethodNode) result);
                     } else if (result instanceof Collection) {
-                        methodList = new LinkedList<MethodNode>((Collection<? extends MethodNode>) result);
+                        methodList = new LinkedList<>((Collection<? extends MethodNode>) result);
                     } else {
                         throw new GroovyBugError("Type checking extension returned unexpected method list: " + result);
                     }
@@ -528,7 +528,7 @@ public class GroovyTypeCheckingExtensionSupport extends AbstractTypeCheckingExte
                 if (methodName == null) {
                     return InvokerHelper.invokeMethod(extension, name, args);
                 }
-                List<Closure> closures = extension.eventHandlers.computeIfAbsent(methodName, k -> new LinkedList<Closure>());
+                List<Closure> closures = extension.eventHandlers.computeIfAbsent(methodName, k -> new LinkedList<>());
                 closures.add((Closure) argsArray[0]);
                 return null;
             } else {

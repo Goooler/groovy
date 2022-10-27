@@ -121,7 +121,7 @@ public class ProxyGenerator {
     }
 
     public GroovyObject instantiateAggregateFromBaseClass(Closure cl, Class clazz) {
-        Map<String, Closure> m = new HashMap<String, Closure>();
+        Map<String, Closure> m = new HashMap<>();
         m.put("*", cl);
         return instantiateAggregateFromBaseClass(m, clazz, null);
     }
@@ -139,7 +139,7 @@ public class ProxyGenerator {
     }
 
     public GroovyObject instantiateAggregateFromInterface(Map map, Class clazz) {
-        List<Class> interfaces = new ArrayList<Class>();
+        List<Class> interfaces = new ArrayList<>();
         interfaces.add(clazz);
         return instantiateAggregate(map, interfaces);
     }

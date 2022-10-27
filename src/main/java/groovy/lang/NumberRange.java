@@ -514,7 +514,7 @@ public class NumberRange extends AbstractList<Comparable> implements Range<Compa
             throw new IllegalArgumentException("fromIndex(" + fromIndex + ") > toIndex(" + toIndex + ")");
         }
         if (fromIndex == toIndex) {
-            return new EmptyRange<Comparable>(from);
+            return new EmptyRange<>(from);
         }
 
         // Performance detail:
@@ -677,7 +677,7 @@ public class NumberRange extends AbstractList<Comparable> implements Range<Compa
 
     @Override
     public List<Comparable> step(int numSteps) {
-        final IteratorClosureAdapter<Comparable> adapter = new IteratorClosureAdapter<Comparable>(this);
+        final IteratorClosureAdapter<Comparable> adapter = new IteratorClosureAdapter<>(this);
         step(numSteps, adapter);
         return adapter.asList();
     }

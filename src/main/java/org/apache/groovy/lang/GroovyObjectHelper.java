@@ -141,7 +141,7 @@ public class GroovyObjectHelper {
         }
     }
 
-    private static final ClassValue<AtomicReference<Lookup>> LOOKUP_MAP = new ClassValue<AtomicReference<Lookup>>() {
+    private static final ClassValue<AtomicReference<Lookup>> LOOKUP_MAP = new ClassValue<>() {
         @Override
         protected AtomicReference<Lookup> computeValue(Class<?> type) {
             return new AtomicReference<>();

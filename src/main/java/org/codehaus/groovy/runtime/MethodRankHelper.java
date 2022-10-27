@@ -71,7 +71,7 @@ public class MethodRankHelper{
      */
     public static String getMethodSuggestionString(String methodName, Class type, Object[] arguments){
         ClassInfo ci = ClassInfo.getClassInfo(type);
-        List<MetaMethod> methods = new ArrayList<MetaMethod>(ci.getMetaClass().getMethods());
+        List<MetaMethod> methods = new ArrayList<>(ci.getMetaClass().getMethods());
         methods.addAll(ci.getMetaClass().getMetaMethods());
         List<MetaMethod> sugg = rankMethods(methodName,arguments,methods);
         StringBuilder sb = new StringBuilder();
@@ -109,8 +109,8 @@ public class MethodRankHelper{
     }
 
     private static List<Pair<Class,Class>> getConflictClasses(List<MetaMethod> sugg, Class[] argumentClasses) {
-        List<Pair<Class,Class>> ret = new LinkedList<Pair<Class,Class>>();
-        Set<Class> recordedClasses = new HashSet<Class>();
+        List<Pair<Class,Class>> ret = new LinkedList<>();
+        Set<Class> recordedClasses = new HashSet<>();
         for (MetaMethod method : sugg) {
             Class[] para = method.getNativeParameterTypes();
             for (Class aPara : para) {
@@ -119,7 +119,7 @@ public class MethodRankHelper{
                     if (argumentClass == null) continue;
                     if (argumentClass == aPara) continue;
                     if (argumentClass.getName().equals(aPara.getName())) {
-                        ret.add(new Pair<Class, Class>(argumentClass, aPara));
+                        ret.add(new Pair<>(argumentClass, aPara));
                     }
                 }
                 recordedClasses.add(aPara);
@@ -174,7 +174,7 @@ public class MethodRankHelper{
     public static String getPropertySuggestionString(String fieldName, Class type){
         ClassInfo ci = ClassInfo.getClassInfo(type);
         List<MetaProperty>  fi = ci.getMetaClass().getProperties();
-        List<RankableField> rf = new ArrayList<RankableField>(fi.size());
+        List<RankableField> rf = new ArrayList<>(fi.size());
         StringBuilder sb = new StringBuilder();
         sb.append("\nPossible solutions: ");
 
@@ -227,7 +227,7 @@ public class MethodRankHelper{
      * @return a sorted lists of Methods
      */
     private static List<MetaMethod> rankMethods(String name, Object[] original, List<MetaMethod> methods) {
-        List<RankableMethod> rm = new ArrayList<RankableMethod>(methods.size());
+        List<RankableMethod> rm = new ArrayList<>(methods.size());
         if (original==null) original = EMPTY_OBJECT_ARRAY;
         Class[] ta = new Class[original.length];
 
@@ -242,7 +242,7 @@ public class MethodRankHelper{
         }
         Collections.sort(rm);
 
-        List<MetaMethod> l =  new ArrayList<MetaMethod>(rm.size());
+        List<MetaMethod> l = new ArrayList<>(rm.size());
         for (RankableMethod m : rm) {
             if (l.size() > MAX_RECOMENDATIONS) break;
             if (m.score > MAX_METHOD_SCORE) break;
@@ -302,7 +302,7 @@ public class MethodRankHelper{
             rc[i] = new RankableConstructor(ta, candidates[i]);
         }
         Arrays.sort(rc);
-        List<Constructor> l = new ArrayList<Constructor>();
+        List<Constructor> l = new ArrayList<>();
         int index = 0;
         while (l.size() < MAX_RECOMENDATIONS && index < rc.length && rc[index].score < MAX_CONSTRUCTOR_SCORE) {
             l.add(rc[index].c);

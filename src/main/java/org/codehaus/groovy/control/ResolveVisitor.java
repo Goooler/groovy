@@ -876,7 +876,7 @@ public class ResolveVisitor extends ClassCodeExpressionTransformer {
     // a PropertyExpression with the ClassExpression of Integer as objectExpression
     // and class as property
     private static Expression correctClassClassChain(final PropertyExpression pe) {
-        LinkedList<Expression> stack = new LinkedList<Expression>();
+        LinkedList<Expression> stack = new LinkedList<>();
         ClassExpression found = null;
         for (Expression it = pe; it != null; it = ((PropertyExpression) it).getObjectExpression()) {
             if (it instanceof ClassExpression) {

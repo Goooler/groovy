@@ -794,7 +794,7 @@ public class IOGroovyMethods extends DefaultGroovyMethodsSupport {
      * @since 1.0
      */
     public static List<String> readLines(Reader reader) throws IOException {
-        IteratorClosureAdapter<String> closure = new IteratorClosureAdapter<String>(reader);
+        IteratorClosureAdapter<String> closure = new IteratorClosureAdapter<>(reader);
         eachLine(reader, closure);
         return closure.asList();
     }
@@ -941,7 +941,7 @@ public class IOGroovyMethods extends DefaultGroovyMethodsSupport {
             bufferedReader = (BufferedReader) self;
         else
             bufferedReader = new BufferedReader(self);
-        return new Iterator<String>() {
+        return new Iterator<>() {
             String nextVal /* = null */;
             boolean nextMustRead = true;
             boolean hasNext = true;
@@ -1009,7 +1009,7 @@ public class IOGroovyMethods extends DefaultGroovyMethodsSupport {
      * @since 1.5.0
      */
     public static Iterator<Byte> iterator(final DataInputStream self) {
-        return new Iterator<Byte>() {
+        return new Iterator<>() {
             Byte nextVal;
             boolean nextMustRead = true;
             boolean hasNext = true;

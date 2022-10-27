@@ -11210,7 +11210,7 @@ public class DefaultGroovyMethods extends DefaultGroovyMethodsSupport {
      * @since 1.7.0
      */
     public static boolean asBoolean(Boolean bool) {
-        return bool != null && bool.booleanValue();
+        return bool != null && bool;
     }
 
     /**
@@ -17615,7 +17615,7 @@ public class DefaultGroovyMethods extends DefaultGroovyMethodsSupport {
      * @since 1.0
      */
     public static <T> Iterator<T> iterator(final Enumeration<T> enumeration) {
-        return new Iterator<T>() {
+        return new Iterator<>() {
             @Override
             public boolean hasNext() {
                 return enumeration.hasMoreElements();

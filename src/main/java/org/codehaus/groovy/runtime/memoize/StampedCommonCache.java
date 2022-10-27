@@ -47,7 +47,7 @@ public class StampedCommonCache<K, V> implements EvictableCache<K, V>, ValueConv
      * Constructs a cache with unlimited size
      */
     public StampedCommonCache() {
-        commonCache = new CommonCache<K, V>();
+        commonCache = new CommonCache<>();
     }
 
     /**
@@ -58,7 +58,7 @@ public class StampedCommonCache<K, V> implements EvictableCache<K, V>, ValueConv
      * @param evictionStrategy LRU or FIFO, see {@link EvictableCache.EvictionStrategy}
      */
     public StampedCommonCache(int initialCapacity, int maxSize, EvictionStrategy evictionStrategy) {
-        commonCache = new CommonCache<K, V>(initialCapacity, maxSize, evictionStrategy);
+        commonCache = new CommonCache<>(initialCapacity, maxSize, evictionStrategy);
     }
 
     /**
@@ -69,7 +69,7 @@ public class StampedCommonCache<K, V> implements EvictableCache<K, V>, ValueConv
      * @param maxSize         max size of the LRU cache
      */
     public StampedCommonCache(int initialCapacity, int maxSize) {
-        commonCache = new CommonCache<K, V>(initialCapacity, maxSize);
+        commonCache = new CommonCache<>(initialCapacity, maxSize);
     }
 
     /**
@@ -79,7 +79,7 @@ public class StampedCommonCache<K, V> implements EvictableCache<K, V>, ValueConv
      * @see #StampedCommonCache(int, int)
      */
     public StampedCommonCache(int maxSize) {
-        commonCache = new CommonCache<K, V>(maxSize);
+        commonCache = new CommonCache<>(maxSize);
     }
 
     /**
@@ -88,7 +88,7 @@ public class StampedCommonCache<K, V> implements EvictableCache<K, V>, ValueConv
      * @param map the {@link Map} instance
      */
     public StampedCommonCache(Map<K, V> map) {
-        commonCache = new CommonCache<K, V>(map);
+        commonCache = new CommonCache<>(map);
     }
 
     /**
@@ -172,12 +172,12 @@ public class StampedCommonCache<K, V> implements EvictableCache<K, V>, ValueConv
      */
     @Override
     public Collection<V> values() {
-        return doWithReadLock(c -> c.values());
+        return doWithReadLock(EvictableCache::values);
     }
 
     @Override
     public Set<Entry<K, V>> entrySet() {
-        return doWithReadLock(c -> c.entrySet());
+        return doWithReadLock(Map::entrySet);
     }
 
     /**
@@ -185,7 +185,7 @@ public class StampedCommonCache<K, V> implements EvictableCache<K, V>, ValueConv
      */
     @Override
     public Set<K> keys() {
-        return doWithReadLock(c -> c.keys());
+        return doWithReadLock(EvictableCache::keys);
     }
 
     /**
@@ -206,7 +206,7 @@ public class StampedCommonCache<K, V> implements EvictableCache<K, V>, ValueConv
      */
     @Override
     public int size() {
-        return doWithReadLock(c -> c.size());
+        return doWithReadLock(EvictableCache::size);
     }
 
     @Override
@@ -240,7 +240,7 @@ public class StampedCommonCache<K, V> implements EvictableCache<K, V>, ValueConv
      */
     @Override
     public Map<K, V> clearAll() {
-        return doWithWriteLock(c -> c.clearAll());
+        return doWithWriteLock(EvictableCache::clearAll);
     }
 
     /**

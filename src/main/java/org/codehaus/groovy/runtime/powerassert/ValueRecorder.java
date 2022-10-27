@@ -26,7 +26,7 @@ import java.util.List;
  * expression.
  */
 public class ValueRecorder {
-    private final List<Value> values = new ArrayList<Value>();
+    private final List<Value> values = new ArrayList<>();
 
     public void clear() {
         values.clear();

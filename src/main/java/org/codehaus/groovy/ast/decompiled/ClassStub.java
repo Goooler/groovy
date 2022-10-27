@@ -62,7 +62,7 @@ class MemberStub implements AnnotatedStub {
 
     AnnotationStub addAnnotation(String desc) {
         AnnotationStub stub = new AnnotationStub(desc);
-        if (annotations == null) annotations = new ArrayList<AnnotationStub>(1);
+        if (annotations == null) annotations = new ArrayList<>(1);
         annotations.add(stub);
         return stub;
     }
@@ -160,7 +160,7 @@ class RecordComponentStub implements AnnotatedStub, AnnotatedTypeStub {
 
     AnnotationStub addAnnotation(String desc) {
         AnnotationStub stub = new AnnotationStub(desc);
-        if (annotations == null) annotations = new ArrayList<AnnotationStub>(1);
+        if (annotations == null) annotations = new ArrayList<>(1);
         annotations.add(stub);
         return stub;
     }
@@ -172,7 +172,7 @@ class RecordComponentStub implements AnnotatedStub, AnnotatedTypeStub {
 
     public TypeAnnotationStub addTypeAnnotation(String desc) {
         TypeAnnotationStub stub = new TypeAnnotationStub(desc);
-        if (typeAnnotations == null) typeAnnotations = new ArrayList<TypeAnnotationStub>(1);
+        if (typeAnnotations == null) typeAnnotations = new ArrayList<>(1);
         typeAnnotations.add(stub);
         return stub;
     }

@@ -136,7 +136,7 @@ public abstract class GeneratedMetaMethod extends MetaMethod {
                          new DataOutputStream(
                                  new BufferedOutputStream(
                                          new FileOutputStream(file)))) {
-                Map<String, Integer> classes = new LinkedHashMap<String, Integer>();
+                Map<String, Integer> classes = new LinkedHashMap<>();
 
                 int nextClassId = 0;
                 for (Class primitive : PRIMITIVE_CLASSES) {
@@ -190,7 +190,7 @@ public abstract class GeneratedMetaMethod extends MetaMethod {
                                  new BufferedInputStream(
                                          loader.getResourceAsStream("META-INF/dgminfo")))) {
 
-                Map<Integer, Class> classes = new HashMap<Integer, Class>();
+                Map<Integer, Class> classes = new HashMap<>();
                 for (int i = 0; i < PRIMITIVE_CLASSES.length; i++) {
                     classes.put(i, PRIMITIVE_CLASSES[i]);
                 }
@@ -218,7 +218,7 @@ public abstract class GeneratedMetaMethod extends MetaMethod {
                 }
 
                 int size = in.readInt();
-                List<DgmMethodRecord> res = new ArrayList<DgmMethodRecord>(size);
+                List<DgmMethodRecord> res = new ArrayList<>(size);
                 for (int i = 0; i != size; ++i) {
                     boolean skipRecord = false;
                     DgmMethodRecord record = new DgmMethodRecord();

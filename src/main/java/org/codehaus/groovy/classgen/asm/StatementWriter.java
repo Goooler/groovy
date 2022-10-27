@@ -68,11 +68,7 @@ public class StatementWriter {
     }
 
     protected void writeStatementLabel(final Statement statement) {
-        Optional.ofNullable(statement.getStatementLabels()).ifPresent(labels -> {
-            labels.stream().map(controller.getCompileStack()::createLocalLabel).forEach(label -> {
-                controller.getMethodVisitor().visitLabel(label);
-            });
-        });
+        Optional.ofNullable(statement.getStatementLabels()).ifPresent(labels -> labels.stream().map(controller.getCompileStack()::createLocalLabel).forEach(label -> controller.getMethodVisitor().visitLabel(label)));
     }
 
     public void writeBlockStatement(final BlockStatement block) {

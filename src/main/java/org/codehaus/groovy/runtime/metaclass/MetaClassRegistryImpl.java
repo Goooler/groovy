@@ -77,9 +77,9 @@ public class MetaClassRegistryImpl implements MetaClassRegistry{
     private final FastArray instanceMethods = new FastArray();
     private final FastArray staticMethods = new FastArray();
 
-    private final LinkedList<MetaClassRegistryChangeEventListener> changeListenerList = new LinkedList<MetaClassRegistryChangeEventListener>();
-    private final LinkedList<MetaClassRegistryChangeEventListener> nonRemoveableChangeListenerList = new LinkedList<MetaClassRegistryChangeEventListener>();
-    private final ManagedConcurrentLinkedQueue<MetaClass> metaClassInfo = new ManagedConcurrentLinkedQueue<MetaClass>(ReferenceBundle.getWeakBundle());
+    private final LinkedList<MetaClassRegistryChangeEventListener> changeListenerList = new LinkedList<>();
+    private final LinkedList<MetaClassRegistryChangeEventListener> nonRemoveableChangeListenerList = new LinkedList<>();
+    private final ManagedConcurrentLinkedQueue<MetaClass> metaClassInfo = new ManagedConcurrentLinkedQueue<>(ReferenceBundle.getWeakBundle());
     private final ExtensionModuleRegistry moduleRegistry = new ExtensionModuleRegistry();
     private final String disabledString = SystemUtil.getSystemPropertySafe(EXTENSION_DISABLE_PROPERTY);
     private final boolean disabling = disabledString != null;
@@ -110,7 +110,7 @@ public class MetaClassRegistryImpl implements MetaClassRegistry{
         this.useAccessible = useAccessible;
 
         if (loadDefault == LOAD_DEFAULT) {
-            final Map<CachedClass, List<MetaMethod>> map = new HashMap<CachedClass, List<MetaMethod>>();
+            final Map<CachedClass, List<MetaMethod>> map = new HashMap<>();
 
             // let's register the default methods
             registerMethods(null, true, true, map);
@@ -219,7 +219,7 @@ public class MetaClassRegistryImpl implements MetaClassRegistry{
                             newParams
                     );
                     final CachedClass declClass = method.getDeclaringClass();
-                    List<MetaMethod> arr = map.computeIfAbsent(declClass, k -> new ArrayList<MetaMethod>(4));
+                    List<MetaMethod> arr = map.computeIfAbsent(declClass, k -> new ArrayList<>(4));
                     arr.add(method);
                     instanceMethods.add(method);
                 }
@@ -237,7 +237,7 @@ public class MetaClassRegistryImpl implements MetaClassRegistry{
                     if (disabling && disabledNames.contains(method.getName())) continue;
                     CachedClass[] paramTypes = method.getParameterTypes();
                     if (paramTypes.length > 0) {
-                        List<MetaMethod> arr = map.computeIfAbsent(paramTypes[0], k -> new ArrayList<MetaMethod>(4));
+                        List<MetaMethod> arr = map.computeIfAbsent(paramTypes[0], k -> new ArrayList<>(4));
                         if (useInstanceMethods) {
                             final NewInstanceMetaMethod metaMethod = new NewInstanceMetaMethod(method);
                             arr.add(metaMethod);
@@ -257,7 +257,7 @@ public class MetaClassRegistryImpl implements MetaClassRegistry{
         try {
             MetaMethod method = (MetaMethod) aClass.getDeclaredConstructor().newInstance();
             final CachedClass declClass = method.getDeclaringClass();
-            List<MetaMethod> arr = map.computeIfAbsent(declClass, k -> new ArrayList<MetaMethod>(4));
+            List<MetaMethod> arr = map.computeIfAbsent(declClass, k -> new ArrayList<>(4));
             arr.add(method);
             instanceMethods.add(method);
         } catch (InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException e) { /* ignore */
@@ -419,7 +419,7 @@ public class MetaClassRegistryImpl implements MetaClassRegistry{
     public MetaClassRegistryChangeEventListener[] getMetaClassRegistryChangeEventListeners() {
         synchronized (changeListenerList) {
             ArrayList<MetaClassRegistryChangeEventListener> ret =
-                    new ArrayList<MetaClassRegistryChangeEventListener>(changeListenerList.size()+nonRemoveableChangeListenerList.size());
+                new ArrayList<>(changeListenerList.size() + nonRemoveableChangeListenerList.size());
             ret.addAll(nonRemoveableChangeListenerList);
             ret.addAll(changeListenerList);
             return ret.toArray(EMPTY_METACLASSREGISTRYCHANGEEVENTLISTENER_ARRAY);
@@ -539,7 +539,7 @@ public class MetaClassRegistryImpl implements MetaClassRegistry{
             List<MetaMethod> metaMethods = module.getMetaMethods();
             for (MetaMethod metaMethod : metaMethods) {
                 CachedClass cachedClass = metaMethod.getDeclaringClass();
-                List<MetaMethod> methods = map.computeIfAbsent(cachedClass, k -> new ArrayList<MetaMethod>(4));
+                List<MetaMethod> methods = map.computeIfAbsent(cachedClass, k -> new ArrayList<>(4));
                 methods.add(metaMethod);
                 if (metaMethod.isStatic()) {
                     staticMethods.add(metaMethod);

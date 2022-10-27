@@ -109,9 +109,9 @@ public class JavaStubGenerator {
     private final String encoding;
     private final boolean requireSuperResolved;
     private final File outputPath;
-    private final ArrayList<MethodNode> propertyMethods = new ArrayList<MethodNode>();
-    private final Map<String, MethodNode> propertyMethodsWithSigs = new HashMap<String, MethodNode>();
-    private final ArrayList<ConstructorNode> constructors = new ArrayList<ConstructorNode>();
+    private final ArrayList<MethodNode> propertyMethods = new ArrayList<>();
+    private final Map<String, MethodNode> propertyMethodsWithSigs = new HashMap<>();
+    private final ArrayList<ConstructorNode> constructors = new ArrayList<>();
     private ModuleNode currentModule;
 
     public JavaStubGenerator(final File outputPath) {
@@ -486,8 +486,8 @@ public class JavaStubGenerator {
         List<FieldNode> fields = classNode.getFields();
         if (fields == null) return;
         final int fieldCnt = fields.size();
-        List<FieldNode> enumFields = new ArrayList<FieldNode>(fieldCnt);
-        List<FieldNode> normalFields = new ArrayList<FieldNode>(fieldCnt);
+        List<FieldNode> enumFields = new ArrayList<>(fieldCnt);
+        List<FieldNode> normalFields = new ArrayList<>(fieldCnt);
         for (FieldNode field : fields) {
             boolean isSynthetic = (field.getModifiers() & Opcodes.ACC_SYNTHETIC) != 0;
             if (field.isEnum()) {

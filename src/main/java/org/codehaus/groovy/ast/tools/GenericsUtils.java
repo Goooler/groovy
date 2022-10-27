@@ -880,7 +880,7 @@ public class GenericsUtils {
      * @since 3.0.0
      */
     public static boolean hasPlaceHolders(final ClassNode type) {
-        return checkPlaceHolders(type, gt -> gt.isPlaceholder());
+        return checkPlaceHolders(type, GenericsType::isPlaceholder);
     }
 
     private static boolean checkPlaceHolders(final ClassNode type, final Predicate<GenericsType> p) {

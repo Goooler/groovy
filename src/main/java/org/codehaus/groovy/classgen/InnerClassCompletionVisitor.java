@@ -242,9 +242,7 @@ public class InnerClassCompletionVisitor extends InnerClassVisitorHelper {
                 ACC_PUBLIC | ACC_STATIC,
                 OBJECT_TYPE,
                 params(param(STRING_TYPE, "name"), param(OBJECT_TYPE, "args")),
-                (methodBody, parameters) -> {
-                    setMethodDispatcherCode(methodBody, classX(outerClass), parameters);
-                }
+                (methodBody, parameters) -> setMethodDispatcherCode(methodBody, classX(outerClass), parameters)
         );
 
         addSyntheticMethod(node,
@@ -277,9 +275,7 @@ public class InnerClassCompletionVisitor extends InnerClassVisitorHelper {
                 ACC_PUBLIC | ACC_STATIC,
                 VOID_TYPE,
                 params(param(STRING_TYPE, "name"), param(OBJECT_TYPE, "value")),
-                (methodBody, parameters) -> {
-                    setPropertySetterDispatcher(methodBody, classX(outerClass), parameters);
-                }
+                (methodBody, parameters) -> setPropertySetterDispatcher(methodBody, classX(outerClass), parameters)
         );
 
         addSyntheticMethod(node,
@@ -311,9 +307,7 @@ public class InnerClassCompletionVisitor extends InnerClassVisitorHelper {
                 ACC_PUBLIC | ACC_STATIC,
                 OBJECT_TYPE,
                 params(param(STRING_TYPE, "name")),
-                (methodBody, parameters) -> {
-                    setPropertyGetterDispatcher(methodBody, classX(outerClass), parameters);
-                }
+                (methodBody, parameters) -> setPropertyGetterDispatcher(methodBody, classX(outerClass), parameters)
         );
     }
 

@@ -3115,9 +3115,7 @@ public class StaticTypeCheckingVisitor extends ClassCodeVisitorSupport {
                 checkClosureSignature(closureParams, inferred, (closureParam, inferredType) -> {
                     ClassNode declaredType = closureParam.getOriginType();
                     if (!typeCheckMethodArgumentWithGenerics(declaredType, inferredType, false)) candIt.remove();
-                }, () -> {
-                    candIt.remove();
-                });
+                }, candIt::remove);
             }
             if (candidates.size() > 1 && resolverClass instanceof ClassExpression) {
                 candidates = resolveWithResolver(candidates, receiver, arguments, expression, selectedMethod, resolverClass, options);
@@ -3135,9 +3133,7 @@ public class StaticTypeCheckingVisitor extends ClassCodeVisitorSupport {
                 checkClosureSignature(closureParams, inferred, (closureParam, inferredType) -> {
                     checkParamType(closureParam, inferredType, false, false);
                     typeCheckingContext.controlStructureVariables.put(closureParam, inferredType);
-                }, () -> {
-                    addError("Incorrect number of parameters. Expected " + inferred.length + " but found " + closureParams.length, expression);
-                });
+                }, () -> addError("Incorrect number of parameters. Expected " + inferred.length + " but found " + closureParams.length, expression));
             }
         }
     }
@@ -4169,20 +4165,16 @@ public class StaticTypeCheckingVisitor extends ClassCodeVisitorSupport {
     }
 
     private void restoreTypeBeforeConditional() {
-        typeCheckingContext.ifElseForWhileAssignmentTracker.forEach((var, types) -> {
-            var.putNodeMetaData(INFERRED_TYPE, types.get(0));
-        });
+        typeCheckingContext.ifElseForWhileAssignmentTracker.forEach((var, types) -> var.putNodeMetaData(INFERRED_TYPE, types.get(0)));
     }
 
     protected Map<VariableExpression, ClassNode> popAssignmentTracking(final Map<VariableExpression, List<ClassNode>> oldTracker) {
         Map<VariableExpression, ClassNode> assignments = new HashMap<>();
-        typeCheckingContext.ifElseForWhileAssignmentTracker.forEach((var, types) -> {
-            types.stream().filter(t -> t != null && t != UNKNOWN_PARAMETER_TYPE) // GROOVY-6099, GROOVY-10294
-                    .reduce(WideningCategories::lowestUpperBound).ifPresent(type -> {
-                assignments.put(var, type);
-                storeType(var, type);
-            });
-        });
+        typeCheckingContext.ifElseForWhileAssignmentTracker.forEach((var, types) -> types.stream().filter(t -> t != null && t != UNKNOWN_PARAMETER_TYPE) // GROOVY-6099, GROOVY-10294
+                .reduce(WideningCategories::lowestUpperBound).ifPresent(type -> {
+            assignments.put(var, type);
+            storeType(var, type);
+        }));
         typeCheckingContext.ifElseForWhileAssignmentTracker = oldTracker;
         return assignments;
     }
@@ -5489,10 +5481,8 @@ public class StaticTypeCheckingVisitor extends ClassCodeVisitorSupport {
 
                         Map<GenericsTypeName, GenericsType> connections = new HashMap<>();
                         extractGenericsConnections(connections, wrapTypeIfNecessary(argumentType), paramType);
-                        connections.forEach((gtn, gt) -> resolvedPlaceholders.merge(gtn, gt, (gt1, gt2) -> {
-                            // GROOVY-10339: incorporate another witness
-                            return getCombinedGenericsType(gt1, gt2);
-                        }));
+                        connections.forEach((gtn, gt) -> // GROOVY-10339: incorporate another witness
+                            resolvedPlaceholders.merge(gtn, gt, StaticTypeCheckingSupport::getCombinedGenericsType));
                     }
                 }
             }
