@@ -123,7 +123,7 @@ configurations {
 }
 
 dependencies {
-    compileOnly providers.provider { "com.github.spotbugs:spotbugs-annotations:${versions.spotbugsAnnotations}" }
+    compileOnly providers.provider { "com.github.spotbugs:spotbugs-annotations:${versions.spotbugs}" }
 
     codenarc "org.codenarc:CodeNarc:${versions.codenarc}"
     codenarc project(":groovy-templates")
